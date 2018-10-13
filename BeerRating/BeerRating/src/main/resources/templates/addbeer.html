@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Beer</title>
 </head>
 <body>
+
+<div>
+<h1>Add a new Beer</h1>
+	<form th:object="${beer}"th:action="@{save}" method="post">
+
+		<label for="name"> Name of the Beer </label>
+			<input type="text" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="alcoholPercentage"> Alcohol %</label>
+			<input type="text" th:field="*{alcoholPercentage}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+	
+		<label for="brewery"> Brewery</label>
+			<input type="text" th:field="*{brewery}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="beerStyle"> Beer style</label>
+			<input type="text" th:field="*{beerStyle}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<input type="submit" value="Add Beer"></input>
+
+
+	</form>
+
+</div>
 
 </body>
 </html>

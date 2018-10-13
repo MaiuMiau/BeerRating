@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Rating</title>
+</head>
+<body>
+
+<div>
+<h1>Add a new Beer</h1>
+	<form th:object="${rating}"th:action="@{save}" method="post">
+
+		<label for="date"> Date </label>
+			<input type="text" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="alocation"> Location</label>
+			<input type="text" th:field="*{alcoholPercentage}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+	
+		<label for="servingStyle">Serving style</label>
+			<input type="text" th:field="*{servingStyle}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="flavorProfile"> flavor Profile</label>
+			<input type="text" th:field="*{flavorProfile}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="rating"> Rating</label>
+			<input type="text" th:field="*{rating}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<input type="submit" value="Add rating"></input>
+
+
+	</form>
+
+</div>
+
+</body>

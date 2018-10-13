@@ -15,28 +15,33 @@
 	<div>
 		<h1>Beers</h1>
 	</div>
-	
 
-	<table border="1">
-		<tr>
-			<th width="300" align="left">Name:</th>
-			<th width="100" align="left">Alcohol %:</th>
-			<th width="200"align="left">Brewery:</th>
-			<th width="100"align="left">BeerStyle:</th>
-	
-			
+	<div th:each="beer : ${beers}">
+		<br>
+		<table border="1">
+			<tr>
+				<th width="300" align="left">Name:</th>
+				<th width="100" align="left">Alcohol %:</th>
+				<th width="200" align="left">Brewery:</th>
+				<th width="100" align="left">BeerStyle:</th>
+				<th width="100" align="left"></th>
+				<th width="100" align="left"></th>
+			</tr>
 
-		</tr>
-		<tr th:each="beer : ${beers}">
-			<td th:text="${beer.name}"></td>
-			<td th:text="${beer.alcoholPercentage}"></td>
-			<td th:text="${beer.brewery}"></td>
-			<td th:text="${beer.beerStyle}"></td>
-			
+			<tr>
+				<td th:text="${beer.name}"></td>
+				<td th:text="${beer.alcoholPercentage}"></td>
+				<td th:text="${beer.brewery}"></td>
+				<td th:text="${beer.beerStyle}"></td>
+				<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
+				<td ><a >Edit</a></td>
+			</tr>
+		</table>
+		<br>
+	</div>
 
-		</tr>
-	</table>
-	<a href="/add" >Add Beer</a>
+
+	<a href="/add">Add Beer</a>
 
 </body>
 </html>
