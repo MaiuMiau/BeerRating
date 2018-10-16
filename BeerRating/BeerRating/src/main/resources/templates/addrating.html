@@ -33,7 +33,7 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 			<label for="rating"> Rating</label>
-			<input type="text" th:field="*{rate}" />
+			<input type="range" th:field="*{rate}" min="0" max="5" step="0.5"/> 
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 			 <!-- <label for="rating"> beer</label>

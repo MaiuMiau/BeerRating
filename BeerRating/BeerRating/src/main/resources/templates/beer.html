@@ -22,6 +22,7 @@
 				<th width="100" align="left">Alcohol %:</th>
 				<th width="200" align="left">Brewery</th>
 				<th width="100" align="left">BeerStyle</th>
+				
 			</tr>
 
 			<tr>
@@ -30,6 +31,7 @@
 				<td th:text="${beer.alcoholPercentage}"></td>
 				<td th:text="${beer.brewery}"></td>
 				<td th:text="${beer.beerStyle}"></td>
+			
 			</tr>
 			
 			<tr>
@@ -38,9 +40,22 @@
 				<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
 				<td ><a th:href="@{/addratings/{id}(id=${beer.beerId})}">Add Rating</a></td>
 			</tr>
+			</table>
+			</div>
+			<br>
+			<table border="1">
+			<tr>
+				
+				<th width="100" align="left">Rating count</th>
+				<th width="100" align="left">Rating average</th>
+			</tr>
+			<tr>
+				<td th:text="${ratings.size()}"></td>
+				<td >/5</td>
+			</tr>
 		
 		</table>
-	</div>
+	
 	<br>
 
 	<div th:switch="${!ratings.empty}">
@@ -60,6 +75,7 @@
 				<th width="200" align="left">flavor Profile</th>
 				<th width="100" align="left">Rating</th>
 				<th width="50" align="left">BeerId</th>
+				
 			</tr>
 			<tr>
 				<td th:text="${rating.id}"></td>
@@ -70,6 +86,12 @@
 				<td th:text="${rating.rate}"></td>
 				<td th:text="${rating.beer.beerId}"></td>
 			<tr>
+			<tr>
+				<td ></td>
+				  <td ><a th:href="@{/deleterating/{ratingid}/{beerid}(ratingid=${rating.id},beerid=${beer.beerId})}">Delete</a></td> 
+			 <!--	<td ><a th:href="@{/deleterating/{beerId}/{ratingId}(beerId=${beer.beerId},ratingId={rating.id})}">Delete Rating</a></td>  -->
+				
+			</tr>
 		</table>
 		<br>
 	</div>

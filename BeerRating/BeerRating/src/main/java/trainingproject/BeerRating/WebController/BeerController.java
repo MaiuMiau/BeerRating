@@ -1,5 +1,7 @@
 package trainingproject.BeerRating.WebController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +58,13 @@ public class BeerController {
 		Beer beer = beerRepository.findById(beerId).get();
 		model.addAttribute("beer", beer);
 		model.addAttribute("ratings", ratingRepository.findByBeer(beer));
+		/*List<Rating> ratings = ratingRepository.findByBeer(beer);
+		
+		for (int i = 0; i < ratings.size() ; i++) {
+			double arvo = Rating.getRate()++;
+			 //arvo = 0 + arvo;
+			 System.out.println("TÄSSÄ ARVOOOO " + arvo);
+		}*/
 		return "beer";
 	}
 
@@ -86,14 +95,18 @@ public class BeerController {
 	/** saves the rating that was posted with the addrating form **/
 	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
 	public String save(Rating rating, @PathVariable("id") Long beerId) {
-
-		//System.out.println("TÄSSÄ LOMAKKEELTA TULEVA RATING" + rating);
-		//System.out.println("TÄSSÄ beerId OLUELLE JOLLE RATING ON TEHTY" + beerId);
 		Beer beer = beerRepository.findById(beerId).get();
 		rating.setBeer(beer);
 		ratingRepository.save(rating);
 
 		return "redirect:/showbeer/" + beer.getBeerId();
+	}
+	
+	/** deletes rating based on id **/
+	@RequestMapping(value = "/deleterating/{ratingid}/{beerid}", method = RequestMethod.GET)
+	public String deleteRating(@PathVariable("ratingid") Long ratingid, @PathVariable("beerid") Long beerid, Model model) {
+		ratingRepository.deleteById(ratingid);
+		return "redirect:/showbeer/"+ beerid;
 	}
 
 	/* /** saves the rating that was posted with the addrating form **/
