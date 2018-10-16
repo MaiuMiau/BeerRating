@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="ISO-8859-1">
+
+
+<title>beerwithratings</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+
+	<div>
+		<h1>Beer</h1>
+	
+		<table border="1">
+			<tr>
+				<th width="50" align="left">Beer id</th>
+				<th width="300" align="left">Name</th>
+				<th width="100" align="left">Alcohol %:</th>
+				<th width="200" align="left">Brewery</th>
+				<th width="100" align="left">BeerStyle</th>
+			</tr>
+
+			<tr>
+				<td th:text="${beer.beerId}"></td>
+				<td th:text="${beer.name}"></td>
+				<td th:text="${beer.alcoholPercentage}"></td>
+				<td th:text="${beer.brewery}"></td>
+				<td th:text="${beer.beerStyle}"></td>
+			</tr>
+			
+			<tr>
+				<td ></td>
+				<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
+				<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
+				<td ><a th:href="@{/addratings/{id}(id=${beer.beerId})}">Add Rating</a></td>
+			</tr>
+		
+		</table>
+	</div>
+	<br>
+
+	<div th:switch="${!ratings.empty}">
+		<div th:case="${false}">
+			<h1>You dont have any ratings for this beer yet!!</h1>
+		</div>
+		<div th:case="${true}">
+			<h1>Ratings</h1>
+		<div th:each="rating: ${ratings}" >
+			<table border="1">
+		
+			<tr>
+				<th width="70" align="left">Rating id</th>
+				<th width="100" align="left">Date</th>
+				<th width="100" align="left">Locatio</th>
+				<th width="200" align="left">Serving Style</th>
+				<th width="200" align="left">flavor Profile</th>
+				<th width="100" align="left">Rating</th>
+				<th width="50" align="left">BeerId</th>
+			</tr>
+			<tr>
+				<td th:text="${rating.id}"></td>
+				<td th:text="${rating.date}"></td>
+				<td th:text="${rating.location}"></td>
+				<td th:text="${rating.servingStyle}"></td>
+				<td th:text="${rating.flavorProfile}"></td>
+				<td th:text="${rating.rate}"></td>
+				<td th:text="${rating.beer.beerId}"></td>
+			<tr>
+		</table>
+		<br>
+	</div>
+	</div>
+	<br>
+	</div>
+	
+	
+
+</body>
+</html>

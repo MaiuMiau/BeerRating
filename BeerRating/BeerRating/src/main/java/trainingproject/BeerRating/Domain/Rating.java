@@ -1,34 +1,54 @@
 package trainingproject.BeerRating.Domain;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+
+
+
+@Entity
 public class Rating {
 	
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private Long id;
-	
+	//Hibernate: insert into rating (beer_id, date, flavor_profile, location, rating, serving_style, id) values (?, ?, ?, ?, ?, ?, ?)
 	private String date;
 	private String location;
 	private String servingStyle;
 	private String flavorProfile;
-	private double rating; 
+	private double rate; 
 	
+	 @ManyToOne
+	 @JoinColumn(name = "beerId")
+	 private Beer beer;
+
 	
 	public Rating() {} 
 	
 	// Parameterized constructor
-	public Rating(Long id,  String date, String location, String servingStyle,String flavorProfile, double rating  ) {
+	public Rating(String date, String location, String servingStyle,String flavorProfile, double rate, Beer beer  ) {
 		super();
 		
 		this.date = date;
 		this.location = location;
 		this.servingStyle = servingStyle;
 		this.flavorProfile = flavorProfile;
-		this.rating = rating;
+		this.rate = rate;
+		this.beer = beer;
 		
+	}
+
+	public Beer getBeer() {
+		return beer;
+	}
+
+	public void setBeer(Beer beer) {
+		this.beer = beer;
 	}
 
 	public Long getId() {
@@ -73,20 +93,28 @@ public class Rating {
 		this.flavorProfile = flavorProfile;
 	}
 
-	public double getRating() {
-		return rating;
+	public double getRate() {
+		return rate;
 	}
 
-	public void setRating(double rating) {
-		this.rating = rating;
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Rating [id=" + id + ", date=" + date + ", location=" + location + ", servingStyle="
 				+ servingStyle + ", flavorProfile=" + flavorProfile + ", rating=" + rating + "]";
-	}
+	}*/
 
+	@Override
+	public String toString() {
+		if (this.beer != null)
+		return "Rating [id=" + id + ", date=" + date + ", location=" + location + ", servingStyle="
+				+ servingStyle + ", flavorProfile=" + flavorProfile + ", rate=" + rate +  this.getBeer() + "]";
+		else return "Rating [id=" + id + ", date=" + date + ", location=" + location + ", servingStyle="
+		+ servingStyle + ", flavorProfile=" + flavorProfile + ", rate=" + rate + "]";
+	}
 	
 	
 	

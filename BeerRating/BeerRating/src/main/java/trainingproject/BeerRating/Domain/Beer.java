@@ -1,10 +1,16 @@
 package trainingproject.BeerRating.Domain;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
 
 
 
@@ -19,9 +25,10 @@ public class Beer {
 	private double alcoholPercentage;
 	private String brewery;
 	private String beerStyle;
-	//private List<Rating> ratings;
 	
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "beer")
+	private List<Rating> ratings;
 	
 	public Beer() {}
 	
@@ -76,13 +83,13 @@ public class Beer {
 		this.beerStyle = beerStyle;
 	}
 
-	/*public List<Rating> getRatings() {
+	public List<Rating> getRatings() {
 		return getRatings();
 	}
 
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
-	}*/
+	}
 
 	@Override
 	public String toString() {

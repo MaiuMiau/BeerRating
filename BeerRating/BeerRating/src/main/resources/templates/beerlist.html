@@ -13,7 +13,7 @@
 <body>
 
 	<div>
-		<h1>Beers</h1>
+		<h1>Your Beers</h1>
 	</div>
 
 	<div th:each="beer : ${beers}">
@@ -24,8 +24,7 @@
 				<th width="100" align="left">Alcohol %:</th>
 				<th width="200" align="left">Brewery:</th>
 				<th width="100" align="left">BeerStyle:</th>
-				<th width="100" align="left"></th>
-				<th width="100" align="left"></th>
+				
 			</tr>
 
 			<tr>
@@ -33,8 +32,17 @@
 				<td th:text="${beer.alcoholPercentage}"></td>
 				<td th:text="${beer.brewery}"></td>
 				<td th:text="${beer.beerStyle}"></td>
-				<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
-				<td ><a >Edit</a></td>
+				
+				
+			</tr>
+			
+			<tr>
+				<td ></td>
+				<td ></td>
+				<td ></td>
+				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
+			<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
+				<td ><a th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
 			</tr>
 		</table>
 		<br>

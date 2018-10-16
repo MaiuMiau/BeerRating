@@ -7,15 +7,21 @@
 <body>
 
 <div>
-<h1>Add a new Beer</h1>
-	<form th:object="${rating}"th:action="@{save}" method="post">
+<h1>Add a new Rating</h1>
 
+
+	<form th:object="${rating}" th:action="@{/saveratings/{id}(id=${beer.beerId})}" method="post">
+
+	<!-- 	<label for="rating"> ID</label>
+			<input type="hidden" th:field="*{id}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->
+		
 		<label for="date"> Date </label>
 			<input type="text" th:field="*{date}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 
-		<label for="alocation"> Location</label>
-			<input type="text" th:field="*{alcoholPercentage}" />
+		<label for="location"> Location</label>
+			<input type="text" th:field="*{location}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 	
 		<label for="servingStyle">Serving style</label>
@@ -27,9 +33,17 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 			<label for="rating"> Rating</label>
-			<input type="text" th:field="*{rating}" />
+			<input type="text" th:field="*{rate}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-
+			
+			 <!-- <label for="rating"> beer</label>
+			<input type="hidden" th:field="*{beer}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->	
+			
+		<!--  <label for="rating"> BeerId</label>
+			<input type="text" th:field="*{beer}"  th:placeholder="${beer.beerId}" th:value="${beer.beerId}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->	
+			
 			<input type="submit" value="Add rating"></input>
 
 

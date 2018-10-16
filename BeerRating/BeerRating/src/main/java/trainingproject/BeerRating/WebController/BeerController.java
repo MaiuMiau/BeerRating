@@ -9,38 +9,103 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
-
-
+import trainingproject.BeerRating.Domain.Rating;
+import trainingproject.BeerRating.Domain.RatingRepository;
 
 @Controller
 public class BeerController {
-	/**  adding beerRepository **/
+	/** adding beerRepository **/
 	@Autowired
 	private BeerRepository beerRepository;
-	
+
+	/** adding ratingRepository **/
+	@Autowired
+	private RatingRepository ratingRepository;
+
 	/** returns a list of beers **/
-	 @RequestMapping(value="/beerlist")
-	    public String bookList(Model model) {	
-	        model.addAttribute("beers", beerRepository.findAll());
-	        return "beerlist";
-	    }
-	 /** returns a empty form for adding beers **/
-	 @RequestMapping(value="/add")
-		 public String addBeer(Model model) {
-			model.addAttribute("beer", new Beer());
-		 
-		  return "addbeer";
-	 }
-	 /** saves the beer that was posted with the form**/
-	 @RequestMapping(value="/save", method = RequestMethod.POST)
-	 public String save(Beer beer) {
-		 beerRepository.save(beer);
-		 return "redirect:beerlist";
-	 }
-	 /** daletes a beer based on id **/
-	 @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	    public String deleteBeer(@PathVariable("id") Long beerId, Model model) {
-	    	beerRepository.deleteById(beerId);
-	        return "redirect:../beerlist"; 
-	    }    
+	@RequestMapping(value = "/beerlist")
+	public String bookList(Model model) {
+		model.addAttribute("beers", beerRepository.findAll());
+		return "beerlist";
+	}
+
+	/** returns a empty form for adding beers **/
+	@RequestMapping(value = "/add")
+	public String addBeer(Model model) {
+		model.addAttribute("beer", new Beer());
+		return "addbeer";
+	}
+
+	/** saves the beer that was posted with the form **/
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String save(Beer beer) {
+		beerRepository.save(beer);
+		return "redirect:beerlist";
+	}
+
+	/** deletes a beer based on id **/
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteBeer(@PathVariable("id") Long beerId, Model model) {
+		beerRepository.deleteById(beerId);
+		return "redirect:../beerlist";
+	}
+
+	/** shows a beer and its ratings based on id **/
+	@RequestMapping(value = "/showbeer/{id}", method = RequestMethod.GET)
+	public String showRatings(@PathVariable("id") Long beerId, Model model) {
+		Beer beer = beerRepository.findById(beerId).get();
+		model.addAttribute("beer", beer);
+		model.addAttribute("ratings", ratingRepository.findByBeer(beer));
+		return "beer";
+	}
+
+	/** edits a beer based on id **/
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String editBeer(@PathVariable("id") Long beerId, Model model) {
+		model.addAttribute("beer", beerRepository.findById(beerId));
+		return "editbeer";
+	}
+
+	/** saves the beer that was edited with the editform and redirects to the beer details page **/
+	@RequestMapping(value = "/saveedited", method = RequestMethod.POST)
+	public String update(Beer beer) {
+		beerRepository.save(beer);
+		return "redirect:/showbeer/" + beer.getBeerId();
+	}
+
+	/** returns a empty form for adding rating to a beer **/
+	@RequestMapping(value = "/addratings/{id}")
+	public String addrating(Model model, @PathVariable("id") Long beerId) {
+
+		model.addAttribute("rating", new Rating());
+		Beer beer = beerRepository.findById(beerId).get();
+		model.addAttribute("beer", beer);
+		return "addrating";
+	}
+
+	/** saves the rating that was posted with the addrating form **/
+	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
+	public String save(Rating rating, @PathVariable("id") Long beerId) {
+
+		//System.out.println("TÄSSÄ LOMAKKEELTA TULEVA RATING" + rating);
+		//System.out.println("TÄSSÄ beerId OLUELLE JOLLE RATING ON TEHTY" + beerId);
+		Beer beer = beerRepository.findById(beerId).get();
+		rating.setBeer(beer);
+		ratingRepository.save(rating);
+
+		return "redirect:/showbeer/" + beer.getBeerId();
+	}
+
+	/* /** saves the rating that was posted with the addrating form **/
+	/*
+	 * @RequestMapping(value = "/saveratings", method = RequestMethod.POST) public
+	 * String save(Rating rating) {
+	 * 
+	 * System.out.println("TÄSSÄ LISTÄÄTY RATING" + rating);
+	 * ratingRepository.save(rating); Beer beer = rating.getBeer();
+	 * System.out.println("TÄSSÄ OLUT JOLLE RATING ON TEHTY" + beer); long beerId =
+	 * beer.getBeerId();
+	 * System.out.println("TÄSSÄ beerId OLUELLE JOLLE RATING ON TEHTY" + beerId);
+	 * //model.addAttribute("beer", beer); return "redirect:/showbeer/" + beerId; }
+	 */
 }
