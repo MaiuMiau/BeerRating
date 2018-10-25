@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -24,6 +26,7 @@ public class Rating {
 	private double rate; 
 	
 	 @ManyToOne
+	 @JsonIgnore
 	 @JoinColumn(name = "beerId")
 	 private Beer beer;
 

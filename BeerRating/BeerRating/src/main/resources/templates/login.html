@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="ISO-8859-1">
+<title>log in to beer application</title>
+</head>
+<body>
+<body>
+     <div >
+        <div  th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div  th:if="${param.logout}">
+            You have been logged out from the BeerRatingAplication.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <div><label> User Name : <input type="text" name="username" /> </label></div>
+            <div><label> Password: <input type="password" name="password" /> </label></div>
+            <div><input type="submit" value="login"/></div>
+        </form>
+        <a th:href="@{/signup}">Sign-up</a>
+       </div>
+    </body>
+
+</body>
+</html>

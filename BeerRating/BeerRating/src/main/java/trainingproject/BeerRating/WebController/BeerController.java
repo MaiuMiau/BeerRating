@@ -3,11 +3,14 @@ package trainingproject.BeerRating.WebController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
@@ -23,10 +26,38 @@ public class BeerController {
 	/** adding ratingRepository **/
 	@Autowired
 	private RatingRepository ratingRepository;
+	
+	
+	
+	 //palauttaa tyhjän login lomakkeen(GET)
+    // springalusta käsittelee loginin POST kun joku kirjautuu sisään
+	/** login form **/
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+    
+    /** "/" **/
+    @RequestMapping(value="/")
+    public String tuut() {	
+        return "login";
+    }	
+    
+    /** RESTful service to get all ratings **/
+    @RequestMapping(value="/ratings", method = RequestMethod.GET)
+    public @ResponseBody List<Rating> ratingListRest() {	
+        return (List<Rating>) ratingRepository.findAll();
+    } 
+    
+    /** RESTful service to get all beers **/
+    @RequestMapping(value="/beers", method = RequestMethod.GET)
+    public @ResponseBody List<Beer> beerListRest() {	
+        return (List<Beer>) beerRepository.findAll();
+    } 
 
 	/** returns a list of beers **/
-	@RequestMapping(value = "/beerlist")
-	public String bookList(Model model) {
+	@RequestMapping(value="/beerlist")
+	public String beerList(Model model) {
 		model.addAttribute("beers", beerRepository.findAll());
 		return "beerlist";
 	}
@@ -39,13 +70,14 @@ public class BeerController {
 	}
 
 	/** saves the beer that was posted with the form **/
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value ="/save", method = RequestMethod.POST)
 	public String save(Beer beer) {
 		beerRepository.save(beer);
 		return "redirect:beerlist";
 	}
 
 	/** deletes a beer based on id **/
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBeer(@PathVariable("id") Long beerId, Model model) {
 		beerRepository.deleteById(beerId);

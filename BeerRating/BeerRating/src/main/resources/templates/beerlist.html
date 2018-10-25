@@ -11,7 +11,16 @@
 
 </head>
 <body>
-
+<div >
+		<h3 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	<div>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
+</div>
 	<div>
 		<h1>Your Beers</h1>
 	</div>
@@ -21,24 +30,23 @@
 		<table border="1">
 			<tr>
 				<th width="300" align="left">Name:</th>
-				<th width="100" align="left">Alcohol %:</th>
+				
 				<th width="200" align="left">Brewery:</th>
-				<th width="100" align="left">BeerStyle:</th>
+				
 				
 			</tr>
 
 			<tr>
 				<td th:text="${beer.name}"></td>
-				<td th:text="${beer.alcoholPercentage}"></td>
+				
 				<td th:text="${beer.brewery}"></td>
-				<td th:text="${beer.beerStyle}"></td>
+				
 				
 				
 			</tr>
 			
 			<tr>
-				<td ></td>
-				<td ></td>
+				
 				<td ></td>
 				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
 			<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
@@ -49,7 +57,7 @@
 	</div>
 
 
-	<a href="/add">Add Beer</a>
+	<a href="/add">Add new Beer</a>
 
 </body>
 </html>

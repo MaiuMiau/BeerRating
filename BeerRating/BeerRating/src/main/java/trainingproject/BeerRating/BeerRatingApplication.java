@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
 import trainingproject.BeerRating.Domain.RatingRepository;
+import trainingproject.BeerRating.Domain.User;
+import trainingproject.BeerRating.Domain.UserRepository;
 import trainingproject.BeerRating.Domain.Rating;
 
 @SpringBootApplication
@@ -23,7 +25,7 @@ public class BeerRatingApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner bookDemo(BeerRepository beerRepository, RatingRepository ratingRepository) {
+	public CommandLineRunner beerDemo(BeerRepository beerRepository, RatingRepository ratingRepository, UserRepository userRepository) {
 		return (args) -> {
 			log.info("save a couple of beers");
 			
@@ -37,7 +39,11 @@ public class BeerRatingApplication {
 			ratingRepository.save(new Rating("21.11.2018 ", "Hilpea Hauki", "Botle", "Malty", 3.25, beerRepository.findByName("Steamworks Pumpkin Ale").get(0)));	
 			ratingRepository.save(new Rating("13.12.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4.5,beerRepository.findByName("Samuel Smith Organic Chocolate Stout").get(0)));
 			
-			
+			// Create users: admin/nurmi mikko/nieminen
+			User user1 = new User("mikko", "$2a$10$CMcOTHrSE0uuk8wiOoFV.OltHTniVbtR96Kjl7gYQ3i/AXqfcXKHm", "USER");
+			User user2 = new User("admin", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
 						
 			log.info("fetch all beers");
 			for (Beer beer: beerRepository.findAll()) {
