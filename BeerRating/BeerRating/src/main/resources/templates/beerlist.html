@@ -6,24 +6,24 @@
 
 
 <title>Beerlist</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 </head>
 <body>
 <div >
-		<h3 th:inline="text">Welcome
-			[[${#httpServletRequest.remoteUser}]]</h3>
+		<h2 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h2>
 	</div>
 	
-	<div>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
-		</form>
-</div>
+	
 	<div>
 		<h1>Your Beers</h1>
 	</div>
+	
+	<a href="/add" class="linkki">Add new Beer</a>
+	<br/><br/>
 
 	<div th:each="beer : ${beers}">
 		<br>
@@ -50,14 +50,19 @@
 				<td ></td>
 				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
 			<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
-				<td ><a th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
+				<td ><a class="linkki" th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
 			</tr>
 		</table>
 		<br>
 	</div>
 
 
-	<a href="/add">Add new Beer</a>
+		
+	<div>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="linkki" />
+		</form>
+</div>
 
 </body>
 </html>

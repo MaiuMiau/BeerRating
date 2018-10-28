@@ -6,20 +6,42 @@
 
 
 <title>beerwithratings</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#button1").click(function(){
+    
+        $("#block1").slideToggle();
+    });
+});
+ 
+</script>
+
+<script>
+$(document).ready(function(){
+    $("#button2").click(function(){
+    
+        $("#block2").slideToggle();
+    });
+});
+ 
+</script>
 </head>
 <body>
 
 
 	<div>
-		<h1>Beer</h1>
+		<h1 th:text="${beer.name}"></h1>
 	
 		<table border="1">
 			<tr>
 				<th width="50" align="left">Beer id</th>
-				<th width="300" align="left">Name</th>
+				
 				<th width="100" align="left">Alcohol %:</th>
 				<th width="200" align="left">Brewery</th>
 				<th width="100" align="left">BeerStyle</th>
@@ -28,7 +50,7 @@
 
 			<tr>
 				<td th:text="${beer.beerId}"></td>
-				<td th:text="${beer.name}"></td>
+				
 				<td th:text="${beer.alcoholPercentage}"></td>
 				<td th:text="${beer.brewery}"></td>
 				<td th:text="${beer.beerStyle}"></td>
@@ -37,9 +59,11 @@
 			
 			<tr>
 				<td ></td>
-				<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
-				<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
-				<td ><a th:href="@{/addratings/{id}(id=${beer.beerId})}">Add Rating</a></td>
+				<td ></td>
+				<td sec:authorize="hasAuthority('ADMIN')" align="right"><a class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="linkki" th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
+				
+				<!--<td ><a th:href="@{/addratings/{id}(id=${beer.beerId})}">Add Rating</a></td> -->
 			</tr>
 			</table>
 			</div>
@@ -59,12 +83,30 @@
 		</table>
 	
 	<br>
-
+	
+	<!-- if ratings is empty -->
 	<div th:switch="${!ratings.empty}">
 		<div th:case="${false}">
-			<h1>You dont have any ratings for this beer yet!!</h1>
+			<h1>There is no ratings for this beer yet!!</h1>
+			<button sec:authorize="hasAuthority('ADMIN')" id="button1" class="form_button">Add Rating</button><br/>
+			<br/>
+			<a href="/beerlist" class="linkki">Back to BeerList</a>
 		</div>
+	<!-- if ratings is Not empty -->
 		<div th:case="${true}">
+		<button  id="button2" class="form_button">Show / Hide Ratings</button>
+		<button sec:authorize="hasAuthority('ADMIN')" id="button1" class="form_button">Add Rating</button>
+		<br/><br/>
+		<a href="/beerlist" class="linkki">Back to BeerList</a>
+		
+		<br/><br/><br/>	
+		<div id="block2">
+		
+			
+			
+
+
+		
 			<h1>Ratings</h1>
 		<div th:each="rating: ${ratings}" >
 			<table border="1">
@@ -89,8 +131,8 @@
 				<td th:text="${rating.beer.beerId}"></td>
 			<tr>
 			<tr>
-				<td ></td>
-				  <td ><a th:href="@{/deleterating/{ratingid}/{beerid}(ratingid=${rating.id},beerid=${beer.beerId})}">Delete</a></td> 
+				
+				  <td ><a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/deleterating/{ratingid}/{beerid}(ratingid=${rating.id},beerid=${beer.beerId})}">Delete</a></td> 
 			 <!--	<td ><a th:href="@{/deleterating/{beerId}/{ratingId}(beerId=${beer.beerId},ratingId={rating.id})}">Delete Rating</a></td>  -->
 				
 			</tr>
@@ -98,10 +140,80 @@
 		<br>
 	</div>
 	</div>
+	</div>
 	<br>
 	</div>
-	<a href="/beerlist">Back to Beers</a>
+
+
+
+<div id="block1">
+<div>
+<h1>Add a new Rating</h1>
+
+
+	<form th:object="${rating}" th:action="@{/saveratings/{id}(id=${beer.beerId})}" method="post">
+
+	<!-- 	<label for="rating"> ID</label>
+			<input type="hidden" th:field="*{id}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->
+		
+		<label for="date"> Date </label>
+			<input type="date" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="location"> Location</label>
+			<input type="text" th:field="*{location}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
 	
+		<label for="servingStyle">Serving style</label>
+			<input type="text" th:field="*{servingStyle}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="flavorProfile"> flavor Profile</label>
+			<input type="text" th:field="*{flavorProfile}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		<!--	<label for="rating"> Rating</label>
+			<input type="range" th:field="*{rate}" min="0" max="5" step="0.5"/> 
+			<div style="clear: both; display: block; height: 10px;"></div>-->
+			
+		
+<!-- LIKE -->
+<label for="rating"> Rating</label>
+<section id="like" class="rating">
+
+  <!-- FIFTH HEART -->
+  <input th:field="*{rate}" type="radio" id="heart_5" name="like" value="5" />
+  <label for="heart_5" title="Five">&#10084;</label>
+  <!-- FOURTH HEART -->
+  <input th:field="*{rate}" type="radio" id="heart_4" name="like" value="4" />
+  <label for="heart_4" title="Four">&#10084;</label>
+  <!-- THIRD HEART -->
+  <input th:field="*{rate}" type="radio" id="heart_3" name="like" value="3" />
+  <label for="heart_3" title="Three">&#10084;</label>
+  <!-- SECOND HEART -->
+  <input th:field="*{rate}" type="radio" id="heart_2" name="like" value="2" />
+  <label for="heart_2" title="Two">&#10084;</label>
+  <!-- FIRST HEART -->
+  <input th:field="*{rate}" type="radio" id="heart_1" name="like" value="1" />
+  <label for="heart_1" title="One">&#10084;</label>
+</section>
+			
+			 <!-- <label for="rating"> beer</label>
+			<input type="hidden" th:field="*{beer}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->	
+			
+		<!--  <label for="rating"> BeerId</label>
+			<input type="text" th:field="*{beer}"  th:placeholder="${beer.beerId}" th:value="${beer.beerId}" />
+			<div style="clear: both; display: block; height: 10px;"></div> -->	
+			
+			<input type="submit" value="Add rating" class="form_button"></input>
+
+
+	</form>
+
+</div>
+</div>
 	
 
 </body>

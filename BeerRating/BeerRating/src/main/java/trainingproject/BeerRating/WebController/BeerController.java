@@ -90,12 +90,15 @@ public class BeerController {
 		Beer beer = beerRepository.findById(beerId).get();
 		model.addAttribute("beer", beer);
 		model.addAttribute("ratings", ratingRepository.findByBeer(beer));
+		model.addAttribute("rating", new Rating());//testi Jquery
+		
+		
 		/*List<Rating> ratings = ratingRepository.findByBeer(beer);
 		
 		for (int i = 0; i < ratings.size() ; i++) {
-			double arvo = Rating.getRate()++;
-			 //arvo = 0 + arvo;
-			 System.out.println("TÄSSÄ ARVOOOO " + arvo);
+			double summa = Rating.getRate();
+			 summa = 0 + summa;
+			 System.out.println("TÄSSÄ ARVOOOO " + summa);
 		}*/
 		return "beer";
 	}
@@ -115,14 +118,14 @@ public class BeerController {
 	}
 
 	/** returns a empty form for adding rating to a beer **/
-	@RequestMapping(value = "/addratings/{id}")
+	/*@RequestMapping(value = "/addratings/{id}")
 	public String addrating(Model model, @PathVariable("id") Long beerId) {
 
 		model.addAttribute("rating", new Rating());
 		Beer beer = beerRepository.findById(beerId).get();
 		model.addAttribute("beer", beer);
 		return "addrating";
-	}
+	}*/
 
 	/** saves the rating that was posted with the addrating form **/
 	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
@@ -130,7 +133,6 @@ public class BeerController {
 		Beer beer = beerRepository.findById(beerId).get();
 		rating.setBeer(beer);
 		ratingRepository.save(rating);
-
 		return "redirect:/showbeer/" + beer.getBeerId();
 	}
 	
