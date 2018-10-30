@@ -13,8 +13,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface BeerRepository extends CrudRepository <Beer, Long>{
+	
+	/** Finds a Beer by name **/
 	List<Beer> findByName(@Param(value="name")String name);
+	/** Finds all beers for sorting **/
 	List<Beer> findAll(Sort sort);
+	
 	List<Beer> findAll();
 	
 	

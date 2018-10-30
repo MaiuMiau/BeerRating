@@ -1,5 +1,6 @@
 package trainingproject.BeerRating.WebController;
 
+import java.util.Collections;
 //import java.util.Collections;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
 import trainingproject.BeerRating.Domain.Rating;
 import trainingproject.BeerRating.Domain.RatingRepository;
+import trainingproject.BeerRating.Domain.UserRepository;
 
 @Controller
 public class BeerController {
@@ -29,6 +31,9 @@ public class BeerController {
 	@Autowired
 	private RatingRepository ratingRepository;
 	
+	/** adding userRepository **/
+	@Autowired
+	private UserRepository userRepository;
 	
 	
 	 //palauttaa tyhjän login lomakkeen(GET)
@@ -44,6 +49,17 @@ public class BeerController {
     public String tuut() {	
         return "login";
     }	
+    
+    
+    /** returns frontpage with user info **/
+	/*@RequestMapping(value="/frontpage", method = RequestMethod.GET)
+	public String Frontpaget(Model model) {
+		
+		model.addAttribute(User user);
+		
+		
+		return "frontpage";
+	}*/
     
     /** RESTful service to get all ratings **/
     @RequestMapping(value="/ratings", method = RequestMethod.GET)
@@ -63,14 +79,14 @@ public class BeerController {
 		//model.addAttribute("beers", beerRepository.findAll());
 		model.addAttribute("beer", new Beer());
 		
-		/** vanha metodi jolla saadan käänteinen järjestys**/
-		//List<Beer>beers = beerRepository.findAll();// piti tehdä metodi beerReposirtoryyn. ei toimi muuten
-		 //Collections.reverse(beers);
-		 /** uusi metodi jolla saadan käänteinen järjestys**/
+		/** uusi metodi jolla saadan käänteinen järjestys**/
 		 List<Beer>beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));//Käänteinen järjestys. uusin ensin.
 		 model.addAttribute("beers", beers);
-		 
 		
+		/** toinen metodi jolla voidaan saada käänteinen järjestys**/
+		//List<Beer>beers = beerRepository.findAll();// piti tehdä metodi beerReposirtoryyn. ei toimi muuten
+		 //Collections.reverse(beers);
+		 	 
 		return "beerlist";
 	}
 
@@ -101,20 +117,22 @@ public class BeerController {
 	public String showRatings(@PathVariable("id") Long beerId, Model model) {
 		Beer beer = beerRepository.findById(beerId).get();
 		model.addAttribute("beer", beer);
-		model.addAttribute("ratings", ratingRepository.findByBeer(beer));
-		model.addAttribute("rating", new Rating());//testi Jquery
+		
+		//model.addAttribute("ratings", ratingRepository.findByBeer(beer));
+		List<Rating> ratings = ratingRepository.findByBeer(beer);
+		Collections.reverse(ratings);
+		model.addAttribute("ratings", ratings);
+		model.addAttribute("rating", new Rating());// for adding new rating
 				
 						
-		double[] kaikkiRatet = ratingRepository.findRatesByBeer(beer);
+		double[] allRates = ratingRepository.findRatesByBeer(beer);
 		
-		double summa = 0;
-		for (int i = 0; i < kaikkiRatet.length ; i++) {
-			summa = summa + kaikkiRatet[i];
-			
-			 //System.out.println("TÄSSÄ SUMMA " + summa);
-			 double keskiarvo = (summa / kaikkiRatet.length);
-			 //System.out.println("KESKIARVO " + keskiarvo);
-			 model.addAttribute("keskiarvo", keskiarvo);
+		double sum = 0;
+		for (int i = 0; i < allRates.length ; i++) {
+			sum = sum + allRates[i];
+		
+			double average = (sum / allRates.length);
+			model.addAttribute("average", average);
 		}
 		
 		/*List<Rating> ratings = ratingRepository.findByBeer(beer);

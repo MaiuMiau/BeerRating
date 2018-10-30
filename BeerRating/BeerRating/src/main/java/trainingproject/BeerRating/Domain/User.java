@@ -1,10 +1,16 @@
 package trainingproject.BeerRating.Domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -18,13 +24,17 @@ public class User {
     private String username;
 
     @Column(name = "password", nullable = false)
-    private String passwordHash;// salasant on cryptattu
+    private String passwordHash;// salasana on cryptattu
     
     
     
 
     @Column(name = "role", nullable = false)// rooli ei saa olla tyhjä
     private String role;
+    
+    /*@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Beer> beers;*/
     
     public User() {
     }
