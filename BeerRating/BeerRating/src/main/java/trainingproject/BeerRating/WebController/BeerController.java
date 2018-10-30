@@ -1,5 +1,6 @@
 package trainingproject.BeerRating.WebController;
 
+import java.security.Principal;
 import java.util.Collections;
 //import java.util.Collections;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
 import trainingproject.BeerRating.Domain.Rating;
 import trainingproject.BeerRating.Domain.RatingRepository;
+import trainingproject.BeerRating.Domain.User;
 import trainingproject.BeerRating.Domain.UserRepository;
 
 @Controller
@@ -52,14 +55,29 @@ public class BeerController {
     
     
     /** returns frontpage with user info **/
-	/*@RequestMapping(value="/frontpage", method = RequestMethod.GET)
-	public String Frontpaget(Model model) {
+	@RequestMapping(value="/frontpage", method = RequestMethod.GET)
+	public String Frontpaget(Model model, Principal principal) {
 		
-		model.addAttribute(User user);
+		String name = principal.getName(); //get logged in username
+		System.out.println("USERNAME TÄÄLLÄ " + name);
+	      model.addAttribute("name", name); 
+		
+		
+
 		
 		
 		return "frontpage";
-	}*/
+	}
+	
+	/** returns a list of userbeers **/
+	@RequestMapping(value="/userbeerlist/{username}" )
+	public String userbeerList(Model model,@PathVariable("username") String username) {
+		System.out.println( "TÄLLÄÄÄ TAAS TUOTO NIMI" + username);
+		model.addAttribute("username", username);
+		//List<Beer> beer = userRepository.findBeersByUsername(username);
+	 
+		return "userbeerlist";
+	}
     
     /** RESTful service to get all ratings **/
     @RequestMapping(value="/ratings", method = RequestMethod.GET)

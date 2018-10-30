@@ -29,7 +29,9 @@ public class BeerRatingApplication {
 		return (args) -> {
 			log.info("save a couple of beers");
 			
-			
+		/*	beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout", userRepository.findByName("admin").get(0)));
+			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale", userRepository.findByName("admin").get(0)));	
+			beerRepository.save(new Beer("Stone's Ginger Joe", 4.0, "Quantum Beverages", "special", userRepository.findByName("admin").get(0)));*/
 			
 			beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout"));
 			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale"));	
@@ -41,7 +43,7 @@ public class BeerRatingApplication {
 			
 			// Create users: admin/nurmi mikko/nieminen
 			User user1 = new User("mikko", "$2a$10$CMcOTHrSE0uuk8wiOoFV.OltHTniVbtR96Kjl7gYQ3i/AXqfcXKHm", "USER");
-			User user2 = new User("admin", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "ADMIN");
+			User user2 = new User("maiju", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "ADMIN");
 			userRepository.save(user1);
 			userRepository.save(user2);
 						

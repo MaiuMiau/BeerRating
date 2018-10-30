@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	          
 		.formLogin()
 			.loginPage("/login")//login urliin saa mennä kaikki
-			.defaultSuccessUrl("/beerlist").permitAll()// sisäänkirjautumisen jälkeen siirtyy beerlistsivulle
+			.defaultSuccessUrl("/frontpage").permitAll()// sisäänkirjautumisen jälkeen siirtyy beerlistsivulle
 			
 		.and()
 	      .logout()

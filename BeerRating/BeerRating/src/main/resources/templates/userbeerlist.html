@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="ISO-8859-1">
+
+
+<title>beerwithratings</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>frontpage</title>
+</head>
+<body>
+<div>
+		<h1 th:text="${username}"></h1>
+		<h2>Your beers</h2>
+		
+		<h2 th:inline="text">
+			[[${#httpServletRequest.remoteUser}]] you have 99 botles of beer on the wall</h2>
+		</div>
+	
+		
+		
+</body>
+</html>
