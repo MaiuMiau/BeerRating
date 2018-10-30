@@ -1,8 +1,10 @@
 package trainingproject.BeerRating.WebController;
 
+//import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,16 +60,26 @@ public class BeerController {
 	/** returns a list of beers **/
 	@RequestMapping(value="/beerlist")
 	public String beerList(Model model) {
-		model.addAttribute("beers", beerRepository.findAll());
+		//model.addAttribute("beers", beerRepository.findAll());
+		model.addAttribute("beer", new Beer());
+		
+		/** vanha metodi jolla saadan käänteinen järjestys**/
+		//List<Beer>beers = beerRepository.findAll();// piti tehdä metodi beerReposirtoryyn. ei toimi muuten
+		 //Collections.reverse(beers);
+		 /** uusi metodi jolla saadan käänteinen järjestys**/
+		 List<Beer>beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));//Käänteinen järjestys. uusin ensin.
+		 model.addAttribute("beers", beers);
+		 
+		
 		return "beerlist";
 	}
 
-	/** returns a empty form for adding beers **/
-	@RequestMapping(value = "/add")
+	/** returns a empty form for adding beers **/ // ei ehkä tarvita enää
+	/*@RequestMapping(value = "/add")
 	public String addBeer(Model model) {
 		model.addAttribute("beer", new Beer());
 		return "addbeer";
-	}
+	}*/
 
 	/** saves the beer that was posted with the form **/
 	@RequestMapping(value ="/save", method = RequestMethod.POST)
@@ -91,7 +103,19 @@ public class BeerController {
 		model.addAttribute("beer", beer);
 		model.addAttribute("ratings", ratingRepository.findByBeer(beer));
 		model.addAttribute("rating", new Rating());//testi Jquery
+				
+						
+		double[] kaikkiRatet = ratingRepository.findRatesByBeer(beer);
 		
+		double summa = 0;
+		for (int i = 0; i < kaikkiRatet.length ; i++) {
+			summa = summa + kaikkiRatet[i];
+			
+			 //System.out.println("TÄSSÄ SUMMA " + summa);
+			 double keskiarvo = (summa / kaikkiRatet.length);
+			 //System.out.println("KESKIARVO " + keskiarvo);
+			 model.addAttribute("keskiarvo", keskiarvo);
+		}
 		
 		/*List<Rating> ratings = ratingRepository.findByBeer(beer);
 		
@@ -117,7 +141,7 @@ public class BeerController {
 		return "redirect:/showbeer/" + beer.getBeerId();
 	}
 
-	/** returns a empty form for adding rating to a beer **/
+	/** returns a empty form for adding rating to a beer **/ // ei ehkä tarvita enää
 	/*@RequestMapping(value = "/addratings/{id}")
 	public String addrating(Model model, @PathVariable("id") Long beerId) {
 
@@ -143,16 +167,5 @@ public class BeerController {
 		return "redirect:/showbeer/"+ beerid;
 	}
 
-	/* /** saves the rating that was posted with the addrating form **/
-	/*
-	 * @RequestMapping(value = "/saveratings", method = RequestMethod.POST) public
-	 * String save(Rating rating) {
-	 * 
-	 * System.out.println("TÄSSÄ LISTÄÄTY RATING" + rating);
-	 * ratingRepository.save(rating); Beer beer = rating.getBeer();
-	 * System.out.println("TÄSSÄ OLUT JOLLE RATING ON TEHTY" + beer); long beerId =
-	 * beer.getBeerId();
-	 * System.out.println("TÄSSÄ beerId OLUELLE JOLLE RATING ON TEHTY" + beerId);
-	 * //model.addAttribute("beer", beer); return "redirect:/showbeer/" + beerId; }
-	 */
+	
 }

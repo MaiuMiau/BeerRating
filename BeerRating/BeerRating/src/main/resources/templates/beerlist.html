@@ -9,6 +9,16 @@
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#button1").click(function(){
+    
+        $("#block1").slideToggle();
+    });
+});
+ 
+</script>
 
 </head>
 <body>
@@ -22,8 +32,38 @@
 		<h1>Your Beers</h1>
 	</div>
 	
-	<a href="/add" class="linkki">Add new Beer</a>
+	<button sec:authorize="hasAuthority('ADMIN')" id="button1" class="form_button">Add new Beer</button>
 	<br/><br/>
+	
+	<div id="block1">
+	<div>
+<h1>Add a new Beer</h1>
+	<form th:object="${beer}"th:action="@{save}" method="post">
+
+		<label for="name"> Name of the Beer </label>
+			<input type="text" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="alcoholPercentage"> Alcohol %</label>
+			<input type="text" th:field="*{alcoholPercentage}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+	
+		<label for="brewery"> Brewery</label>
+			<input type="text" th:field="*{brewery}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		<label for="beerStyle"> Beer style</label>
+			<input type="text" th:field="*{beerStyle}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<input type="submit" value="Add Beer" class="linkki"></input>
+
+
+	</form>
+
+</div>
+	
+	</div>
 
 	<div th:each="beer : ${beers}">
 		<br>
