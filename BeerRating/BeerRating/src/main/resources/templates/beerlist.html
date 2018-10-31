@@ -9,97 +9,36 @@
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#button1").click(function(){
-    
-        $("#block1").slideToggle();
-    });
-});
- 
-</script>
 
 </head>
 <body>
-<div >
+	<div>
 		<h2 th:inline="text">Welcome
 			[[${#httpServletRequest.remoteUser}]]</h2>
-			
-			
-	</div>
-	
-	
-	<div>
-		<h1>Your Beers</h1>
-	</div>
-	
-	<button sec:authorize="hasAuthority('ADMIN')" id="button1" class="form_button">Add new Beer</button>
-	<br/><br/>
-	
-	<div id="block1">
-	<div>
-<h1>Add a new Beer</h1>
-	<form th:object="${beer}"th:action="@{save}" method="post">
-
-		<label for="name"> Name of the Beer </label>
-			<input type="text" th:field="*{name}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-
-		<label for="alcoholPercentage"> Alcohol %</label>
-			<input type="text" th:field="*{alcoholPercentage}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-	
-		<label for="brewery"> Brewery</label>
-			<input type="text" th:field="*{brewery}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-
-		<label for="beerStyle"> Beer style</label>
-			<input type="text" th:field="*{beerStyle}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-
-			<input type="submit" value="Add Beer" class="linkki"></input>
-
-
-	</form>
-
-</div>
-	
 	</div>
 
+	<h1>All the Beers in the database</h1>
 	<div th:each="beer : ${beers}">
 		<br>
 		<table border="1">
 			<tr>
-				<th width="300" align="left">Name:</th>
-				
-				<th width="200" align="left">Brewery:</th>
-				
-				
+				<th width="300" align="left">Name</th>
+				<th width="200" align="left">Brewery</th>
 			</tr>
 
 			<tr>
 				<td th:text="${beer.name}"></td>
-				
 				<td th:text="${beer.brewery}"></td>
-				
-				
-				
 			</tr>
-			
+
 			<tr>
-				
-				<td ></td>
-				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
-			<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
-				<td ><a class="linkki" th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
+				<td></td>
+				<td><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
 			</tr>
 		</table>
 		<br>
 	</div>
 
-
-		
 	<div>
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="linkki" />

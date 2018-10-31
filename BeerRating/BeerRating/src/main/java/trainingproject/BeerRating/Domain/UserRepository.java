@@ -8,11 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 
 public interface UserRepository extends CrudRepository<User, Long> {
+	
 	User findByUsername(String username);
 	/** Finds a list of beers for user **/
-	//List<Beer> findBeersByUsername(String username);
+	List<Beer> findBeersByUsername(String username);
 	
 	/** Finds user by name **/
-	//List<User> findByName(@Param(value="name")String name);
+	List<User> findByusername(@Param(value="username")String username);
 	 
 }

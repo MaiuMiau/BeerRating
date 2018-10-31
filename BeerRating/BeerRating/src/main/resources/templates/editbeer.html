@@ -11,33 +11,35 @@
 <h1> Edit beer</h1>
 	<form th:object="${beer}" th:action="@{../saveedited}" action="#"method="post">
 		
-		
-		<input type="hidden" th:field="*{beerId}"/> 
+			<input type="hidden" th:field="*{beerId}"/> 
 		
 		<div >
-		<label for="btitle" >Name</label>
-		<input type="text" th:field="*{name}" /> 
+			<label for="name" >Name</label>
+			<input type="text" th:field="*{name}" /> 
 		</div>
 		
 		<div >
-		<label for="author">Alcohol %	</label>
-		<input type="text" th:field="*{alcoholPercentage}"  /> 
+			<label for="alcohol%">Alcohol %	</label>
+			<input type="text" th:field="*{alcoholPercentage}"  /> 
 		</div>
 		
 		<div >
-		<label for="year">Brewery</label>
-		<input type="text" th:field="*{brewery}" />
+			<label for="brewery">Brewery</label>
+			<input type="text" th:field="*{brewery}" />
 		</div>
 		
 		<div >
-		<label for="isbn">Beer Style</label>
-		<input type="text" th:field="*{beerStyle}" > 
+			<label for="style">Beer Style</label>
+			<input type="text" th:field="*{beerStyle}" > 
 		</div>
 		
+		<div >
+			<input type="hidden" th:field="*{user}" > 
+		</div>
 		
-		
+
 		<div style="clear: both; display: block; height: 15px;">
-		<input type="submit" value="Save"></input>
+			<input type="submit" value="Save"></input>
 		</div>
 	</form>
 	</div>

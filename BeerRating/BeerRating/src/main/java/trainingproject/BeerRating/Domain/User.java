@@ -32,11 +32,19 @@ public class User {
     @Column(name = "role", nullable = false)// rooli ei saa olla tyhjä
     private String role;
     
-    /*@JsonIgnore
+    @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<Beer> beers;*/
+	private List<Beer> beers;
     
-    public User() {
+    public List<Beer> getBeers() {
+		return beers;
+	}
+
+	public void setBeers(List<Beer> beers) {
+		this.beers = beers;
+	}
+
+	public User() {
     }
 
 	public User(String username, String passwordHash, String role) {

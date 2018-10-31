@@ -1,6 +1,5 @@
 package trainingproject.BeerRating.Domain;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,42 +13,46 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
-
-
-
 @Entity
 public class Beer {
-	
+
 	@Id // primary key
-	@GeneratedValue(strategy = GenerationType.AUTO) 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long beerId;
 	private String name;
 	private double alcoholPercentage;
 	private String brewery;
 	private String beerStyle;
-	
-	/* @ManyToOne
-	 @JsonIgnore
-	 @JoinColumn(name = "Id")
-	 private User user;*/
-	
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "username")
+	private User user;
+
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "beer")
 	private List<Rating> ratings;
-	
-	public Beer() {}
-	
+
+	public Beer() {
+	}
+
 	// Parameterized constructor
-	public Beer(String name, double alcoholPercentage, String brewery, String beerStyle  ) {
+	public Beer(String name, double alcoholPercentage, String brewery, String beerStyle, User user) {
 		super();
 		this.name = name;
 		this.alcoholPercentage = alcoholPercentage;
 		this.brewery = brewery;
 		this.beerStyle = beerStyle;
-		
-		
+		this.user = user;
+
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Long getBeerId() {
@@ -100,18 +103,21 @@ public class Beer {
 		this.ratings = ratings;
 	}
 
+	/*
+	 * @Override public String toString() { return "Beer [beerId=" + beerId +
+	 * ", name=" + name + ", alcoholPercentage=" + alcoholPercentage + ", brewery="
+	 * + brewery + ", beerStyle=" + beerStyle + "]"; }
+	 */
+
 	@Override
 	public String toString() {
-		return "Beer [beerId=" + beerId + ", name=" + name + ", alcoholPercentage=" + alcoholPercentage + ", brewery="
-				+ brewery + ", beerStyle=" + beerStyle + "]";
+		if (this.user != null)
+			return "Beer [beerId=" + beerId + ", name=" + name + ", alcoholPercentage=" + alcoholPercentage
+					+ ", brewery=" + brewery + ", beerStyle=" + beerStyle + ", user=" + this.getUser() + "]";
+
+		else
+			return "Beer [beerId=" + beerId + ", name=" + name + ", alcoholPercentage=" + alcoholPercentage
+					+ ", brewery=" + brewery + ", beerStyle=" + beerStyle + "]";
 	}
-	
-	/*@Override
-	public String toString() {
-		return "Beer [beerId=" + beerId + ", name=" + name + ", alcoholPercentage=" + alcoholPercentage + ", brewery="
-				+ brewery + ", beerStyle=" + beerStyle + ", ratings=" + ratings + "]";
-	}*/
-	
-	
 
 }

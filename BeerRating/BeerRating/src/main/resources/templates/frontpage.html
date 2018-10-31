@@ -13,17 +13,19 @@
 </head>
 <body>
 <div>
-		<h1 th:text="${name}"></h1>
-		<h2>Welcome</h2>
+		<h1 th:text="${username}"></h1>
+		<h2>Welcome to Beer Rating Application</h2>
 		
-		<h2 th:inline="text">Moikka moi
+		<h2 th:inline="text">Moikka
 			[[${#httpServletRequest.remoteUser}]]</h2>
 		</div>
 		
+		<a class="linkki" th:href="@{/userbeerlist/{username}(username=${username})}">Show My beers</a>
+		<br /> <br />
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="linkki" />
+		</form>
 		
-		<a class="linkki" th:href="@{/userbeerlist/{username}(username=${name})}">Show My beers</a>
-	<!--  <a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/userbeerlist/{username}(usernme=${name})}">Delete</a>-->
-		
-		
+
 </body>
 </html>

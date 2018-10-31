@@ -46,8 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 	        
 	        	.antMatchers("/signup", "/saveuser").permitAll()
-	        	.antMatchers( "/", "beerlist").permitAll()
-	        	.antMatchers ("/delete/**", "/edit/**" ).hasAuthority("ADMIN") // vain admin voi poistaa tai editoida
+	        	.antMatchers( "/").permitAll()
+	        	.antMatchers ("/delete/**", "/edit/**" ).permitAll()
+	        	.antMatchers ("/beerlist" ).hasAuthority("ADMIN")// vain admin voi poistaa tai editoida
 	        	.anyRequest().authenticated() // millekään sivulle ei pääse ilman kirjautumista
 	        	.and()
 	          
