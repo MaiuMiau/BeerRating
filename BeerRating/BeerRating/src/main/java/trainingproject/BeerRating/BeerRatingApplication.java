@@ -29,13 +29,14 @@ public class BeerRatingApplication {
 		return (args) -> {
 			log.info("save a couple of beers");
 			
-			// Create users: admin/nurmi mikko/nieminen
+			// Create users:  mikko/nieminen, maiju/nurmi, admin/admin
 			User user1 = new User("mikko", "$2a$10$CMcOTHrSE0uuk8wiOoFV.OltHTniVbtR96Kjl7gYQ3i/AXqfcXKHm", "USER");
-			User user2 = new User("maiju", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "ADMIN");
+			User user2 = new User("maiju", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "USER");
+			User user3 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
 			userRepository.save(user1);
 			userRepository.save(user2);
+			userRepository.save(user3);
 			
-			System.out.println("KAIKKI USERIT LISÄTTY COMMANDLINERUNNERILLA");
 			
 			beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout", userRepository.findByusername("maiju").get(0)));
 			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale", userRepository.findByusername("maiju").get(0)));	
@@ -51,19 +52,19 @@ public class BeerRatingApplication {
 			ratingRepository.save(new Rating("21.11.2018 ", "Hilpea Hauki", "Botle", "Malty", 3.25, beerRepository.findByName("Steamworks Pumpkin Ale").get(0)));	
 			ratingRepository.save(new Rating("13.12.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4.5,beerRepository.findByName("Samuel Smith Organic Chocolate Stout").get(0)));
 			
-			System.out.println("KAIKKI RATINGIT LISÄTTY COMMANDLINERUNNERILLA");
+			
 		
 						
 			log.info("fetch all beers");
 			for (Beer beer: beerRepository.findAll()) {
 				log.info(beer.toString());
-				System.out.println("FETCH ALL BEERS COMMANDLINERUNNERILLA");
+			
 			}
 			
 			log.info("fetch all ratings");
 			for (Rating rating: ratingRepository.findAll()) {
 				log.info(rating.toString());
-				System.out.println("FETCH ALL RATINGS COMMANDLINERUNNERILLA");
+				
 			}
 
 		};

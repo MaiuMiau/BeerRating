@@ -20,24 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 @Autowired
 	    private UserDetailServiceImpl userDetailsService;	
-	/*
-	 @Override
-	protected void configure(HttpSecurity http) throws Exception {
-		  http
-	        .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
-	        .and()
-	        .authorizeRequests().antMatchers("/signup", "/saveuser").permitAll()
-	        .and()
-	        .authorizeRequests().anyRequest().authenticated()
-	        .and()
-	      .formLogin()
-	          .loginPage("/login")
-	          .defaultSuccessUrl("/beerlist")
-	          .permitAll()
-	          .and()
-	      .logout()
-	          .permitAll();
-		}*/
+	
 	
 	protected void configure(HttpSecurity http) throws Exception {
 		 http
@@ -48,17 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        	.antMatchers("/signup", "/saveuser").permitAll()
 	        	.antMatchers( "/").permitAll()
 	        	.antMatchers ("/delete/**", "/edit/**" ).permitAll()
-	        	.antMatchers ("/beerlist" ).hasAuthority("ADMIN")// vain admin voi poistaa tai editoida
-	        	.anyRequest().authenticated() // millekään sivulle ei pääse ilman kirjautumista
+	        	.antMatchers ("/beerlist" ,"/userlist"  ).hasAuthority("ADMIN")
+	        	.anyRequest().authenticated()
 	        	.and()
 	          
 		.formLogin()
-			.loginPage("/login")//login urliin saa mennä kaikki
-			.defaultSuccessUrl("/frontpage").permitAll()// sisäänkirjautumisen jälkeen siirtyy beerlistsivulle
+			.loginPage("/login")
+			.defaultSuccessUrl("/frontpage").permitAll()
 			
 		.and()
 	      .logout()
-	          .permitAll();//logout urliin saa mennä kaikki
+	          .permitAll();
 		}
 	 @Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

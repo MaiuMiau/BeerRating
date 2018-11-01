@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="ISO-8859-1">
 
 <title>Edit beer</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 </head>
 <body>
-<div >
+<div class="headingcontainer" >
+	<h1 class="headingcontainer">Beer Rating</h1>
+</div>
+<div class="container" >
 <h1> Edit beer</h1>
-	<form th:object="${beer}" th:action="@{../saveedited}" action="#"method="post">
+	<form class="cf" th:object="${beer}" th:action="@{../saveedited}" action="#"method="post">
 		
 			<input type="hidden" th:field="*{beerId}"/> 
 		
-		<div >
-			<label for="name" >Name</label>
-			<input type="text" th:field="*{name}" /> 
-		</div>
+		<div class="half left cf">
+			<label for="name"> Name of the Beer </label>
+			<input type="text" th:field="*{name}" /><br />
 		
-		<div >
-			<label for="alcohol%">Alcohol %	</label>
-			<input type="text" th:field="*{alcoholPercentage}"  /> 
+			<label for="alcoholPercentage"> Alcohol %</label>
+			<input type="text" th:field="*{alcoholPercentage}" /><br />
 		</div>
-		
-		<div >
-			<label for="brewery">Brewery</label>
-			<input type="text" th:field="*{brewery}" />
-		</div>
-		
-		<div >
-			<label for="style">Beer Style</label>
-			<input type="text" th:field="*{beerStyle}" > 
+		<div class="half right cf">
+			<label for="brewery"> Brewery</label>
+			<input type="text" th:field="*{brewery}" /><br />
+	
+			<label for="beerStyle"> Beer style</label>
+			<input type="text" th:field="*{beerStyle}" /><br />
 		</div>
 		
 		<div >
@@ -39,9 +41,9 @@
 		
 
 		<div style="clear: both; display: block; height: 15px;">
-			<input type="submit" value="Save"></input>
+			<input class="form_button" type="submit" value="Save"></input>
 		</div>
 	</form>
-	</div>
+	</div><!-- end of container -->
 </body>
 </html>

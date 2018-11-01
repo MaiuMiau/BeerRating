@@ -76,6 +76,24 @@ public class BeerController {
 		
 		return "frontpage";
 	}
+	
+	/** returns a list of all beers in database for admin **/
+	@RequestMapping(value = "/beerlist")
+	public String beerList(Model model) {
+		
+		// reverse List so that the newest is on top
+		List<Beer> beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));														
+		model.addAttribute("beers", beers);
+		return "beerlist";
+	}
+	
+	/** returns a list of all users in database for admin **/
+	@RequestMapping(value = "/userlist")
+	public String userlist(Model model) {
+		 model.addAttribute("users", userRepository.findAll());
+		System.out.println("TÄÄLLÄ KAIKKI USERIT " + userRepository.findAll());
+		return "userlist";
+	}
 
 	/** returns a list of usersbeers **/
 	@RequestMapping(value = "/userbeerlist/{username}")
@@ -98,16 +116,7 @@ public class BeerController {
 		return "userbeerlist";
 	}
 
-	/** returns a list of all beers in database for admin **/
-	@RequestMapping(value = "/beerlist")
-	public String beerList(Model model) {
-		
-		// reverse List so that the newest is on top
-		List<Beer> beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));														
-		model.addAttribute("beers", beers);
-		return "beerlist";
-	}
-
+	
 	/** saves users beer that was posted with the form from userbeerlist page**/
 	@RequestMapping(value = "/save/{username}", method = RequestMethod.POST)
 	public String savebeerforuser(Beer beer,Model model, @PathVariable("username") String username) {

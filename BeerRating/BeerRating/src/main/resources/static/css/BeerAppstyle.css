@@ -1,40 +1,190 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+html {
+	background-color: white;
+   font-family: 'Montserrat', Arial, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+	font-family: 'Montserrat', Arial, sans-serif;
+	border: solid 2px #474544;
+	border-radius: 5px;
+	width:100%;
+	margin:auto;
+	max-width:600px;
+	min-height:670px;
+	position:relative;
+	
+	background:url(http://myy.haaga-helia.fi/~a1704485/beerrating/IMG_0678.JPG)center ;
+	background-position: center top; 
+	background-repeat:repeat;
+    background-size:650px;
+  	
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+	
+	
+    
+}
+
+table{
+  display: inline-block;
+  width: 480px;
+  margin: 5px auto;
+  padding: 3px 3px 3px 3px  ;
+  border:1px dashed #474544;
+  border-radius: 5px;
+  position: relative;
+  
+ 
+  
+}
+td{
+	padding: 3px 3px 3px 3px  ;
+	font-size: 0.975em;px;
+  	color: #383635;
+    aling:left;
+   }
+   
+   th{
+	padding: 3px 3px 3px 3px  ;
+	font-size: 0.975em;px;
+  	color: black;;
+    aling:left;
+   }
+   
+
+tr{
+	text-aling:left;
+}
+
+.container {
+  max-width: 500px;
+  background: rgb(232, 217, 155, 0.95);
+  border-radius: 5px;
+  margin: 20px auto;
+  
+  position: relative;
+  padding-left: 20px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+
+}
+
+.headingcontainer {
+  max-width: 500px;
+  
+  margin: 20px auto;
+  padding: 3px 3px  ;
+  position: relative;
+  
+  
+  	text-align:center;
+    font-size:60px;
+    color:white;
+
+}
+
+h1 {
+    
+    /*text-align:center;*/
+    font-size:27px;
+    padding:0;
+    margin:0 0 20px 0;
+    position:relative;
+    color:black;
+}
+
+h2 {
+    
+    text-align:center;
+    font-size:20px;
+    padding:0;
+    margin:0 0 20px 0;
+    position:relative;
+    color:black;
+}
+
+form{
+	max-width: 500px;
+   margin: 20px auto;
+  
+}
+.half {
+  float: left;
+  width: 48%;
+  margin-bottom: 1em;
+}
+
+.right { width: 50%; }
+
+.left {
+     margin-right: 2%; 
+}
+
 
 
 /* slideToggle DIV */
-      #block1 {
-          width: 400px;
-          height: 400px;
-          display:none;
-          Border: solid 0.5px;
+  #block1 {
+  max-width: 500px;
+  background: rgb(232, 217, 155, 0.95);
+  border-radius: 5px;
+  margin: 50px auto;
+  padding-left: 20px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+  display:none;  
+   }
+   #block2 {
+  max-width: 500px;
+  background: rgb(232, 217, 155, 0.95);
+  border-radius: 5px;
+  margin: 50px auto;
+  padding-left: 20px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+  position: relative;
+  display:none;
+  padding-left: 20px;
           
         }
-    
-      #block2 {
-          width: 700px;
-          
-          display:none;
-          Border: solid 0.5px;
-          
-        }
+        
+  
+        
+input[type='text'], [type="password"] { 
+	
+    display:block;
+    width:200px;
+    padding:8px 8px 8px 8px ;
+    border:1px dashed #DBDBDB;
+    color:#3F3F3F;
+}
+
+label{
+	display: block;
+	padding-bottom:8px;
+}
   
 /* -BUTTONS */
 .form_button {
+  min-width: 70px;
+  
   background: none;
   border: solid 1px #474544;
+  border-radius: 3px;
   color: #454744;
   cursor: pointer;
   display: inline-block;
-  background: #f9f177;
+  background: #b2b3b7;
   font-size: 0.775em;
   /*font-weight: bold;*/
   outline: none;
   padding: 8px 8px;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-ms-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
+  
 }
 
 .form_button:hover {
@@ -44,22 +194,20 @@
 
 
 .linkki {
+  min-width: 70px;
   background: none;
   border: solid 1px #474544;
+  border-radius: 3px;
   color: #454744;
   cursor: pointer;
   display: inline-block;
-   background: #f9f177;
+   background: #b2b3b7;
   font-size: 0.775em;
   /*font-weight: bold;*/
   outline: none;
   padding: 8px 8px;
   text-transform: uppercase;
-  -webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	-ms-transition: all 0.3s;
-	-o-transition: all 0.3s;
-	transition: all 0.3s;
+
 	text-decoration: none;
 }
 
@@ -80,11 +228,11 @@
   width: 150px;
   height: 30px;
   padding: 5px 10px;
-  margin: auto;
-  border-radius: 30px;
-  border:solid 0.5px;
+
+  border-radius: 5px;
+  border:1px dashed #DBDBDB;
   background: #FFF;
-  display: block;
+  
   overflow: hidden;
   
  
@@ -96,7 +244,7 @@
   display: none;
 }
 
-/* - - - - - RATE */
+/* - - - - - RATE tähti*/
 #rate {
   top: -65px;
 }
@@ -106,6 +254,7 @@
   width: 30px;
   height: 30px;
   display: block;
+ 
   
   color: rgba(0, 135, 211, .4);
   line-height: 33px;
@@ -125,7 +274,7 @@
 #rate > input:checked ~ label {
   color: rgb(0, 135, 211);
 }
-/* - - - - - LIKE */
+/* - - - - - LIKE sydän*/
 #like {
   bottom: -65px;
 }

@@ -22,82 +22,81 @@ $(document).ready(function(){
 <title>UsersBeerList</title>
 </head>
 <body>
-<div>
-		
-		<h2>Your beers</h2>
+
+<div class="headingcontainer" >
+	<h1 class="headingcontainer">Beer Rating</h1>
+</div>
+	<div class="container" >
+		<h1>Here are all your beers</h1>
 		<h1 th:text="${user.username}"></h1>
-		<h2 th:inline="text">
-			[[${#httpServletRequest.remoteUser}]] you have 99 botles of beer on the wall</h2>
-		</div>
+	
 		
-		<br/>
-		<div>
-		<form th:action="@{/logout}" method="post">
+	<table >
+		<tr>
+			<td></td>
+			<td><button id="button1" class="form_button">New Beer</button></td>
+			<td><a class="linkki" th:href="@{/frontpage}">To FrontPage</a></td>
+			<td><form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="linkki" />
-		</form>
-		<br /> 
-		<a class="linkki" th:href="@{/frontpage}">Back to FrontPage</a>
-		</div>
-		<br/>
-	
-	<!-- if beers is empty -->
-	<div th:switch="${!beers.empty}">
-	<div th:case="${false}">
-	<h1>You dont have any beers yet!!</h1>
-	<button id="button1" class="form_button">Add new Beer</button>
-	<br/>
-	</div>
-	<!-- if beers is Not empty -->
-	<div th:case="${true}">
-	<button id="button1" class="form_button">Add new Beer</button>
-	<br/>
-	</div>
-	</div>
-	<br><br>
+			</form></td>
+		</tr>
+	</table>
+</div><!-- end of container -->
+
 	<div id="block1">
-	<div>
-<h1>Add a new Beer</h1>
-	 <form th:object="${beer}"th:action="@{/save/{username}(username=${user.username})}" method="post">
-<!--<form th:object="${beer}" th:action="@{/save/{username}(username=${user.username)}" method="post">-->
-
-		<label for="name"> Name of the Beer </label>
-			<input type="text" th:field="*{name}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-
-		<label for="alcoholPercentage"> Alcohol %</label>
-			<input type="text" th:field="*{alcoholPercentage}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
 	
-		<label for="brewery"> Brewery</label>
-			<input type="text" th:field="*{brewery}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+<h1>Add a new Beer</h1>
+	 <form class="cf" th:object="${beer}"th:action="@{/save/{username}(username=${user.username})}" method="post">
 
-		<label for="beerStyle"> Beer style</label>
-			<input type="text" th:field="*{beerStyle}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
+		<div class="half left cf">
+			<label for="name"> Name of the Beer </label>
+			<input type="text" th:field="*{name}" /><br />
+		
+			<label for="alcoholPercentage"> Alcohol %</label>
+			<input type="text" th:field="*{alcoholPercentage}" /><br />
+		</div>
+		<div class="half right cf">
+			<label for="brewery"> Brewery</label>
+			<input type="text" th:field="*{brewery}" /><br />
+	
+			<label for="beerStyle"> Beer style</label>
+			<input type="text" th:field="*{beerStyle}" /><br />
+		</div>
 
 			<input type="submit" value="Add Beer" class="linkki"></input>
-
 
 	</form>
 
 </div>
-	</div>
 
 
-	<div th:each="beer : ${beers}">
-		<br>
-		<table border="1">
+		<!-- if beers is empty -->
+		<div th:if="${beers.empty}">
+			<div class="container" >
+				<h1>You dont have any beers yet!!</h1>
+			</div><!-- end of container -->
+		</div><!-- end of th:ifr -->
+			
+	
+	
+	<!-- if beers is Not empty -->
+	<div th:if="${!beers.empty}">
+		<div class="container" >
+			
+			<div th:each="beer : ${beers}">
+		
+		<table >
 			<tr>
-				<th width="300" align="left">Name:</th>
-				<th width="200" align="left">Brewery:</th>
-				<th width="200" align="left">username:</th>
+				<th width="100" align="left">Name:</th>
+				<td width="400" th:text="${beer.name}"></td>
+				
+			<!--  <th width="200" align="left">username:</th> -->	
 			</tr>
 
 			<tr>
-				<td th:text="${beer.name}"></td>
-				<td th:text="${beer.brewery}"></td>
-				<td th:text="${beer.user.username}"></td>
+				<th width="100" align="left">Brewery:</th>
+				<td width="400"th:text="${beer.brewery}"></td>
+			<!-- <td th:text="${beer.user.username}"></td> -->	
 			</tr>
 
 			<tr>
@@ -105,13 +104,22 @@ $(document).ready(function(){
 				<td></td>
 				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
 				<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
-				<td><a class="linkki"
+				<td align="right"><a class="linkki"
 					th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
 			</tr>
 		</table>
 		<br>
-	</div>
-	<br/><br/>
+		</div>
+		</div><!-- end of container -->
+	</div><!-- end of th:ifr -->
+	
+	
+	
+
+	
+	
+	
+	
 	
 		
 </body>

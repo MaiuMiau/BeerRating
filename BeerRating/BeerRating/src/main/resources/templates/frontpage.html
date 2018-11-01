@@ -12,20 +12,26 @@
 <title>frontpage</title>
 </head>
 <body>
-<div>
-		<h1 th:text="${username}"></h1>
-		<h2>Welcome to Beer Rating Application</h2>
+
+<div class="headingcontainer" >
+	<h1 class="headingcontainer">Beer Rating</h1>
+</div>
+	<div class="container" >
+		<!-- <h1>Welcome</h1>
+		<h1 th:text="${username}"> </h1> -->
 		
-		<h2 th:inline="text">Moikka
-			[[${#httpServletRequest.remoteUser}]]</h2>
-		</div>
+		<h1 th:inline="text">Welcome [[${username}]]!</h1>
 		
-		<a class="linkki" th:href="@{/userbeerlist/{username}(username=${username})}">Show My beers</a>
-		<br /> <br />
+		<div class="cf" >
+		
+		<a  sec:authorize="hasAuthority('USER')"class="linkki" th:href="@{/userbeerlist/{username}(username=${username})}">Show My beers</a>
+		<br /> 
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="linkki" />
 		</form>
-		
-
+		<a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/userlist}">Show all users</a>
+		<a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/beerlist}">Show all beers</a>
+		</div>
+</div>
 </body>
 </html>

@@ -5,47 +5,44 @@
 <meta charset="ISO-8859-1">
 
 
-<title>Beerlist</title>
+<title>Userlist</title>
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 </head>
 <body>
+
 <div class="headingcontainer" >
 	<h1 class="headingcontainer">Beer Rating</h1>
 </div>
-	<div class="container" >
-	<h1>All the Beers in the database</h1>
-	<div th:each="beer : ${beers}">
+	<div>
+		<h2 th:inline="text">
+			[[${#httpServletRequest.remoteUser}]]</h2>
+	</div>
+<div class="container" >
+	<h1>All the Users in the database</h1>
+	<div th:each="user: ${users}">
 		<br>
 		<table border="1">
 			<tr>
-				<th width="150" align="left">Name</th>
-				<td width="350" th:text="${beer.name}"></td>
+				<th width="300" align="left">Username</th>
 				
 			</tr>
 
 			<tr>
-				<th width="150" align="left">Brewery</th>
-				<td width="350" th:text="${beer.brewery}"></td>
-			</tr>
-			
-			<tr>
-				<th width="150" align="left">Who added</th>
-				<td width="350" th:text="${beer.user.username}"></td>
+				<td th:text="${user.username}"></td>
+				
 			</tr>
 
-			<tr>
-				<td></td>
-				<td align="right"><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
-			</tr>
+			
 		</table>
 		<br>
 	</div>
-	<a class="linkki" th:href="@{/frontpage}">Back to FrontPage</a>
-<br><br>
+	<br>
+		<a class="linkki" th:href="@{/frontpage}">Back to FrontPage</a>
 	<div>
+	<br>
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign Out" class="linkki" />
 		</form>

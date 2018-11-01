@@ -2,26 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="ISO-8859-1">
-<title>log in to beer application</title>
+<title>login to beerrating</title>
+<link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 </head>
 <body>
 <body>
-     <div >
+<div class="headingcontainer" >
+<h1 class="headingcontainer">Beer Rating</h1>
+</div>
+     
         <div  th:if="${param.error}">
+        <div class="container" >
             Invalid username and password.
+            </div><!-- end of container -->
         </div>
-        <br/><br/>	
+        
         <div  th:if="${param.logout}">
+         <div class="container" >
             You have been logged out from the BeerRatingAplication.
+            </div><!-- end of container -->
         </div>
-        <br/><br/>	
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username" /> </label></div>
-            <div><label> Password: <input type="password" name="password" /> </label></div>
-            <div><input type="submit" value="login"/></div>
+        <br/>	
+        <div class="container" >
+        <h1>LogIn to your BeerRating Account</h1>
+        
+        <form class="cf" th:action="@{/login}" method="post">
+           <div class="half left cf">
+            	<label> User Name : </label> 
+            	<input type="text" name="username" />
+            </div>
+           <div class="half right cf">
+           		<label> Password: </label>
+           		<input type="password" name="password" />
+		</div>
+            <input   class="form_button" type="submit" value="login"/> <br/>
+            
+            <p>Not yet a member?</p>	
+        	<a class="linkki" th:href="@{/signup}">Sign-up</a>
         </form>
-        <a th:href="@{/signup}">Sign-up</a>
+        
+       
+        
+        
        </div>
+       
     </body>
 
 </body>

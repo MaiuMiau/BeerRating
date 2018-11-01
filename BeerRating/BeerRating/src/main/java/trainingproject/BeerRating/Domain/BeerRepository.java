@@ -20,7 +20,7 @@ public interface BeerRepository extends CrudRepository <Beer, Long>{
 	/** Finds all beers for sorting **/
 	List<Beer> findAll(Sort sort);
 	
-	List<Beer> findAll();
+	//List<Beer> findAll();
 	
 	/** Finds a list of beers for user **/
 	List<Beer> findByUser(User user);
