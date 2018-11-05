@@ -14,11 +14,10 @@
 <body>
 
 <div class="headingcontainer" >
-	<h1 class="headingcontainer">Beer Rating</h1>
+		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/beigeoikea.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/beigevasen.png}"/></h1>
 </div>
 	<div class="container" >
-		<!-- <h1>Welcome</h1>
-		<h1 th:text="${username}"> </h1> -->
+		<div class="innercontainer" >
 		
 		<h1 th:inline="text">Welcome [[${username}]]!</h1>
 		
@@ -32,6 +31,7 @@
 		<a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/userlist}">Show all users</a>
 		<a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/beerlist}">Show all beers</a>
 		</div>
+		</div><!-- end of innercontainer -->
 </div>
 </body>
 </html>

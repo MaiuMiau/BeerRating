@@ -42,11 +42,7 @@ public class BeerRatingApplication {
 			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale", userRepository.findByusername("maiju").get(0)));	
 			beerRepository.save(new Beer("Stone's Ginger Joe", 4.0, "Quantum Beverages", "special", userRepository.findByusername("mikko").get(0)));
 			beerRepository.save(new Beer("Hitachino Nest Dai Dai IPA", 6.0, "Kiuchi Brewery", "IPA", userRepository.findByusername("mikko").get(0)));
-			System.out.println("KAIKKI OLUET LISÄTTY COMMANDLINERUNNERILLA");
-			
-			/*beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout"));
-			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale"));	
-			beerRepository.save(new Beer("Stone's Ginger Joe", 4.0, "Quantum Beverages", "special"));*/
+		
 			
 			ratingRepository.save(new Rating("12.09.2018", "BeerHouse", "Botle", "Sweet", 5.0, beerRepository.findByName("Stone's Ginger Joe").get(0)));
 			ratingRepository.save(new Rating("21.11.2018 ", "Hilpea Hauki", "Botle", "Malty", 3.25, beerRepository.findByName("Steamworks Pumpkin Ale").get(0)));	

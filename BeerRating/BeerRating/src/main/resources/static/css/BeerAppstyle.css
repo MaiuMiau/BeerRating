@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 html {
-	background-color: white;
+	background-color:rgb(255, 250, 232);
    font-family: 'Montserrat', Arial, sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -13,14 +13,16 @@ body {
 	border-radius: 5px;
 	width:100%;
 	margin:auto;
-	max-width:600px;
+	max-width:700px;
 	min-height:670px;
 	position:relative;
+	/*background:url(http://myy.haaga-helia.fi/~a1704485/beerrating/IMG_0678.JPG)center ;*/
+	background-image: url('../images/back2.JPG');
 	
-	background:url(http://myy.haaga-helia.fi/~a1704485/beerrating/IMG_0678.JPG)center ;
+	
 	background-position: center top; 
 	background-repeat:repeat;
-    background-size:650px;
+    background-size:700px;
   	
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 	
@@ -28,13 +30,19 @@ body {
     
 }
 
+.errors {
+	color: #ff0080;
+  	font-size: 0.775em;
+}
+
 table{
   display: inline-block;
-  width: 480px;
-  margin: 5px auto;
+ max-width: 480px;
+ 
   padding: 3px 3px 3px 3px  ;
-  border:1px dashed #474544;
+ /* border:1px dashed #474544;*/
   border-radius: 5px;
+  border-spacing: 8px;
   position: relative;
   
  
@@ -60,11 +68,44 @@ tr{
 }
 
 .container {
-  max-width: 500px;
+  max-width: 550px;
   background: rgb(232, 217, 155, 0.95);
   border-radius: 5px;
   margin: 20px auto;
   
+  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+
+}
+
+
+
+.headingcontainer {
+  max-width: 550px;
+  
+  margin: 20px auto;
+  
+  position: relative;
+  
+  
+  	text-align:center;
+    font-size:50px;
+   /* text-shadow: 3px 2px rgb(255, 250, 232, 0.6);
+    color:black;*/
+    
+	color: rgb(232, 217, 155, 0.95);
+    text-shadow: 3px 2px black;
+}
+
+.innercontainer {
+  max-width: 500px;
+  background: rgb(255, 250, 232, 0.6);
+  border-radius: 5px;
+  margin: 5px auto;
+  margin-top: 10px;
   position: relative;
   padding-left: 20px;
   padding-top: 14px;
@@ -72,19 +113,22 @@ tr{
 
 }
 
-.headingcontainer {
-  max-width: 500px;
-  
-  margin: 20px auto;
-  padding: 3px 3px  ;
-  position: relative;
-  
-  
-  	text-align:center;
-    font-size:60px;
-    color:white;
-
+.valkoinen {
+	
+	
+	vertical-align: middle;
+            width: 20%;
 }
+
+.musta {
+	
+	
+	vertical-align:top;
+            width: 20%;
+}
+
+
+
 
 h1 {
     
@@ -127,28 +171,30 @@ form{
 
 /* slideToggle DIV */
   #block1 {
-  max-width: 500px;
+  max-width: 550px;
   background: rgb(232, 217, 155, 0.95);
   border-radius: 5px;
   margin: 50px auto;
-  padding-left: 20px;
+   padding-left: 10px;
+  padding-right: 10px;
   padding-top: 14px;
   padding-bottom: 10px;
   position: relative;
-  padding-left: 20px;
+  
   display:none;  
    }
    #block2 {
-  max-width: 500px;
+  max-width: 550px;
   background: rgb(232, 217, 155, 0.95);
   border-radius: 5px;
   margin: 50px auto;
-  padding-left: 20px;
+   padding-left: 10px;
+  padding-right: 10px;
   padding-top: 14px;
   padding-bottom: 10px;
   position: relative;
   display:none;
-  padding-left: 20px;
+  
           
         }
         
@@ -170,7 +216,7 @@ label{
   
 /* -BUTTONS */
 .form_button {
-  min-width: 70px;
+  min-width: 30px;
   
   background: none;
   border: solid 1px #474544;
@@ -179,7 +225,7 @@ label{
   cursor: pointer;
   display: inline-block;
   background: #b2b3b7;
-  font-size: 0.775em;
+  font-size: 0.675em;
   /*font-weight: bold;*/
   outline: none;
   padding: 8px 8px;
@@ -194,7 +240,7 @@ label{
 
 
 .linkki {
-  min-width: 70px;
+  min-width: 30px;
   background: none;
   border: solid 1px #474544;
   border-radius: 3px;
@@ -202,12 +248,12 @@ label{
   cursor: pointer;
   display: inline-block;
    background: #b2b3b7;
-  font-size: 0.775em;
+  font-size: 0.675em;
   /*font-weight: bold;*/
   outline: none;
   padding: 8px 8px;
   text-transform: uppercase;
-
+ text-align:center;
 	text-decoration: none;
 }
 

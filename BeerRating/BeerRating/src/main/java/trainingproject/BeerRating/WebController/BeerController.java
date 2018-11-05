@@ -5,11 +5,14 @@ import java.util.Collections;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -91,7 +94,7 @@ public class BeerController {
 	@RequestMapping(value = "/userlist")
 	public String userlist(Model model) {
 		 model.addAttribute("users", userRepository.findAll());
-		System.out.println("TÄÄLLÄ KAIKKI USERIT " + userRepository.findAll());
+		
 		return "userlist";
 	}
 
@@ -142,28 +145,32 @@ public class BeerController {
 	@RequestMapping(value = "/showbeer/{id}", method = RequestMethod.GET)
 	public String showRatings(@PathVariable("id") Long beerId, Model model) {
 		
-		Beer beer = beerRepository.findById(beerId).get();
-		model.addAttribute("beer", beer);
-
-		List<Rating> ratings = ratingRepository.findByBeer(beer);
-		Collections.reverse(ratings);//reverse List of ratings so that the newest is on top
-		model.addAttribute("ratings", ratings);
 		
-		model.addAttribute("rating", new Rating());// for adding new rating with Jqueryform
+			Beer beer = beerRepository.findById(beerId).get();
+			model.addAttribute("beer", beer);
 
-		// calculate average from beers ratings
-		double[] allRates = ratingRepository.findRatesByBeer(beer);
-		double sum = 0;
-		
-		for (int i = 0; i < allRates.length; i++) {
-			sum = sum + allRates[i];
+			List<Rating> ratings = ratingRepository.findByBeer(beer);
+			Collections.reverse(ratings);//reverse List of ratings so that the newest is on top
+			model.addAttribute("ratings", ratings);
+			
+			
+			model.addAttribute("rating", new Rating());// for adding new rating with Jqueryform
 
-			double average = (sum / allRates.length);
-			model.addAttribute("average", average);
+			// calculate average from beers ratings
+			double[] allRates = ratingRepository.findRatesByBeer(beer);
+			double sum = 0;
+			
+			for (int i = 0; i < allRates.length; i++) {
+				sum = sum + allRates[i];
+
+				double average = (sum / allRates.length);
+				model.addAttribute("average", average);
+			}
+			
+			return "beer";
 		}
 		
-		return "beer";
-	}
+	
 
 	/** edits a beer based on id **/
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -179,22 +186,29 @@ public class BeerController {
 	 * details page
 	 **/
 	@RequestMapping(value = "/saveedited", method = RequestMethod.POST)
-	public String update(Beer beer) {
+	public String update(@Valid Beer beer , BindingResult bindingResult, Model model) {
 		
-		beerRepository.save(beer);
+		 if (bindingResult.hasErrors()) {
+	        	return "editbeer";
+	        }
+		 	
+		 	beerRepository.save(beer);
+		 	return "redirect:/showbeer/" + beer.getBeerId();
+	    }
 		
-		return "redirect:/showbeer/" + beer.getBeerId();
-	}
+		
 
 	/** saves the rating that was posted with the addrating form **/
 	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
-	public String save(Rating rating, @PathVariable("id") Long beerId) {
+	public String save(Rating rating, BindingResult bindingResult, @PathVariable("id") Long beerId ) {
 		
-		Beer beer = beerRepository.findById(beerId).get();
-		rating.setBeer(beer);
-		ratingRepository.save(rating);
-		
+			Beer beer = beerRepository.findById(beerId).get();
+			rating.setBeer(beer);
+			ratingRepository.save(rating);
+			
 		return "redirect:/showbeer/" + beer.getBeerId();
+		
+		
 	}
 
 	/** deletes rating based on id **/

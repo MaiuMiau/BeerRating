@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -20,6 +21,7 @@ public class Rating {
 	private Long id;
 	//Hibernate: insert into rating (beer_id, date, flavor_profile, location, rating, serving_style, id) values (?, ?, ?, ?, ?, ?, ?)
 	private String date;
+	
 	private String location;
 	private String servingStyle;
 	private String flavorProfile;

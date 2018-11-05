@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,9 +23,19 @@ public class Beer {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long beerId;
+	
+	@NotNull
+	@Size(min=5, max=50)
 	private String name;
+	
+	@NotNull
+	@Range(min = 0, max = 20)
 	private double alcoholPercentage;
+	
+	@Size(min=5, max=50)
 	private String brewery;
+	
+	@Size(min=2, max=30)
 	private String beerStyle;
 
 	@JsonIgnore

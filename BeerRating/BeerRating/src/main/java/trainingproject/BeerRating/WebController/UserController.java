@@ -37,7 +37,7 @@ public class UserController {
 	     * @return
 	     */
 	 @RequestMapping(value = "saveuser", method = RequestMethod.POST)
-	    public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {//+ Model model?
+	    public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {
 	    	if (!bindingResult.hasErrors()) { // validation errors
 	    		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match		
 		    		String pwd = signupForm.getPassword();

@@ -8,11 +8,14 @@
 <body>
 <body>
 <div class="headingcontainer" >
-<h1 class="headingcontainer">Beer Rating</h1>
+
+
+<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/beige.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/beige.png}"/></h1>
 </div>
      
         <div  th:if="${param.error}">
         <div class="container" >
+        
             Invalid username and password.
             </div><!-- end of container -->
         </div>
@@ -22,8 +25,9 @@
             You have been logged out from the BeerRatingAplication.
             </div><!-- end of container -->
         </div>
-        <br/>	
+       
         <div class="container" >
+        	<div class="innercontainer" >
         <h1>LogIn to your BeerRating Account</h1>
         
         <form class="cf" th:action="@{/login}" method="post">
@@ -42,7 +46,7 @@
         </form>
         
        
-        
+        </div><!-- end of innercontainer -->
         
        </div>
        

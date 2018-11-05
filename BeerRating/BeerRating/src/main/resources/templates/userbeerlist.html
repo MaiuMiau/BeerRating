@@ -24,13 +24,12 @@ $(document).ready(function(){
 <body>
 
 <div class="headingcontainer" >
-	<h1 class="headingcontainer">Beer Rating</h1>
+	<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/beige.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/beige.png}"/></h1>
 </div>
 	<div class="container" >
+	<div class="innercontainer" >
 		<h1>Here are all your beers</h1>
-		<h1 th:text="${user.username}"></h1>
-	
-		
+
 	<table >
 		<tr>
 			<td></td>
@@ -41,9 +40,11 @@ $(document).ready(function(){
 			</form></td>
 		</tr>
 	</table>
+	</div><!-- end of innercontainer -->
 </div><!-- end of container -->
 
 	<div id="block1">
+	<div class="innercontainer" >
 	
 <h1>Add a new Beer</h1>
 	 <form class="cf" th:object="${beer}"th:action="@{/save/{username}(username=${user.username})}" method="post">
@@ -66,14 +67,16 @@ $(document).ready(function(){
 			<input type="submit" value="Add Beer" class="linkki"></input>
 
 	</form>
-
+	</div><!-- end of innercontainer -->
 </div>
 
 
 		<!-- if beers is empty -->
 		<div th:if="${beers.empty}">
 			<div class="container" >
-				<h1>You dont have any beers yet!!</h1>
+				<div class="innercontainer" >
+					<h1>You dont have any beers yet!!</h1>
+				</div><!-- end of innercontainer -->
 			</div><!-- end of container -->
 		</div><!-- end of th:ifr -->
 			
@@ -84,18 +87,19 @@ $(document).ready(function(){
 		<div class="container" >
 			
 			<div th:each="beer : ${beers}">
-		
+			<div class="innercontainer" >
+		<img class= "musta" width="80" th:src="@{/images/korkkimusta.png}"/>
 		<table >
 			<tr>
 				<th width="100" align="left">Name:</th>
-				<td width="400" th:text="${beer.name}"></td>
+				<td width="225" th:text="${beer.name}"></td>
 				
 			<!--  <th width="200" align="left">username:</th> -->	
 			</tr>
 
 			<tr>
 				<th width="100" align="left">Brewery:</th>
-				<td width="400"th:text="${beer.brewery}"></td>
+				<td width="225"th:text="${beer.brewery}"></td>
 			<!-- <td th:text="${beer.user.username}"></td> -->	
 			</tr>
 
@@ -105,22 +109,16 @@ $(document).ready(function(){
 				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
 				<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
 				<td align="right"><a class="linkki"
-					th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
+					th:href="@{/showbeer/{id}(id=${beer.beerId})}">Details</a></td>
 			</tr>
 		</table>
+		</div><!-- end of innercontainer -->
 		<br>
 		</div>
 		</div><!-- end of container -->
 	</div><!-- end of th:ifr -->
 	
-	
-	
 
-	
-	
-	
-	
-	
 		
 </body>
 </html>

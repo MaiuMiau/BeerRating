@@ -33,26 +33,28 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="headingcontainer" >
-<h1 class="headingcontainer">Beer Rating</h1>
+<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/beige.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/beige.png}"/></h1>
 </div>
 <div class="container" >
-	<div>
+	<div class="innercontainer" >
 		<h1 th:text="${beer.name}"></h1>
 	
-		<table>
+		<table  >
 			<tr>
-				<th width="100" align="left">Brewery</th>
-				<td  width="200" th:text="${beer.brewery}"></td>
+				<th align="left">Brewery</th>
+				<td  width="380" th:text="${beer.brewery}"></td>
 			</tr>
-
+			</table>
+			
+		<table >
 			<tr>
-				<th width="100" align="left">Alcohol %</th>
-				<td  width="200" th:text="${beer.alcoholPercentage}"></td>
+				<th width="80" align="left">Alcohol %</th>
+				<td  width="100"  th:text="${beer.alcoholPercentage}"></td>
 			
 			</tr>
 			<tr>
-				<th width="100" align="left">BeerStyle</th>
-				<td  width="200" th:text="${beer.beerStyle}"></td>
+				<th width="80" align="left">Style</th>
+				<td width="100"   th:text="${beer.beerStyle}"></td>
 			</tr>
 			<tr>
 				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
@@ -62,9 +64,11 @@ $(document).ready(function(){
 			<!-- 		<td style="visibility:hidden" th:text="${beer.user.username}"></td>-->
 			<!-- 	<td style="visibility:hidden" th:text="${beer.beerId}"></td> -->
 			</tr>
+			
 		</table>
-	</div>
-			<br>
+		<img width="270" th:src="@{/images/pullo2.png}"/>
+	</div><!-- end of innercontainer -->
+			<div class="innercontainer" >
 	<table>
 			<tr>
 				<th width="150" align="left">Rating count</th>
@@ -83,13 +87,20 @@ $(document).ready(function(){
 				<th width="150" align="left"><button id="button2" class="form_button">Show / Hide Ratings</button></th>
 				<td><a class="linkki" th:href="@{/frontpage}">To FrontPage</a></td>
 			</tr>
+			
+			
 	</table>
+	
+	</div><!-- end of innercontainer -->
+	
 </div><!-- end of container -->
 
 	<!-- if ratings is empty -->
 	<div th:if="${ratings.empty}">
 		<div class="container" >
+		<div class="innercontainer" >
 			<h2>There is no ratings for this beer yet!!</h2>
+			</div><!-- end of innercontainer -->
 		</div><!-- end of container -->
 	</div><!-- end of th:if-->
 
@@ -98,47 +109,55 @@ $(document).ready(function(){
 		<div th:if="${!ratings.empty}">
 			<div id="block2">
 			
-				<h1>Ratings</h1>
 				<div th:each="rating: ${ratings}">
-					<table>
+				<div class="innercontainer" >
+									
+		<table>
+		
+			<tr>
+				<td th:text="${rating.date}"></td>	
+			</tr>
+			<tr>
+				<th  align="left">Rating</th>
+				<td th:text="${rating.rate}"></td>
+			</tr>
+			
+			<tr>
+				<th width="120" align="left">Location</th>
+				<td width="360" th:text="${rating.location}"></td>
+				
+			<!--  <th width="200" align="left">username:</th> -->	
+			</tr>
 
-						<tr>
-							<!-- <th width="70" align="left">Rating id</th>-->
-							<th width="90" align="left">Date</th>
-							<td th:text="${rating.date}"></td>
-							
-							<th width="120" align="left">Serving Style</th>
-							<td th:text="${rating.servingStyle}"></td>
-							
-							
-							<!--<th width="50" align="left">BeerId</th>-->
-						</tr>
-						<tr>
-							<!--<td th:text="${rating.id}"></td>-->
-							<th width="90" align="left">Location</th>
-							<td th:text="${rating.location}"></td>
-							<th width="100" align="left">Flavor Profile</th>
-							<td th:text="${rating.flavorProfile}"></td>
-							
-							<!--<td th:text="${rating.beer.beerId}"></td>-->
-						<tr>
-						<tr>
-						<th width="90" align="left">Rating</th>
-						<td th:text="${rating.rate}"></td>
-							
-						</tr>
-						<tr>
-							<td><a sec:authorize="hasAuthority('USER')" class="linkki"th:href="@{/deleterating/{ratingid}/{beerid}(ratingid=${rating.id},beerid=${beer.beerId})}">Delete</a></td>
-						</tr>
-					</table>
-					<br>
+			<tr>
+				<th width="120" align="left">Serving Style</th>
+				<td width="360"th:text="${rating.servingStyle}"></td>	
+			</tr>
+			
+			<tr>
+				<th width="120" align="left">Flavor Profile</th>
+				<td width="360"th:text="${rating.flavorProfile}"></td>
+			</tr>
+			
+			
+
+			<tr>
+
+				<td></td>
+				
+				<td align="right"><a sec:authorize="hasAuthority('USER')" class="linkki"th:href="@{/deleterating/{ratingid}/{beerid}(ratingid=${rating.id},beerid=${beer.beerId})}">Delete</a></td>
+			</tr>
+		</table>
+						</div><!-- end of innercontainer -->
 				</div><!-- end of th:each-->
+			
 		</div><!-- end of block2-->
 		</div><!-- end of th:if-->
 		
 
 	<!-- visible when add rating buttons is clicked -->
 	<div id="block1">
+	<div class="innercontainer" >
 		
 			<h1>Add a new Rating</h1>
 
@@ -150,8 +169,11 @@ $(document).ready(function(){
 			
 
 				<label for="location"> Location</label> <input type="text"
-					th:field="*{location}" /><br />
+					th:field="*{location}" />
+					<div th:if="${#fields.hasErrors('location')}" th:errors="*{location}"> error</div>
+					<br />
 				</div>
+				
 		
 				<label for="servingStyle">Serving style</label> <input type="text"
 					th:field="*{servingStyle}" /><br />
@@ -187,8 +209,8 @@ $(document).ready(function(){
 
 				<input type="submit" value="Add" class="form_button"></input>
 			</form>
-
-		</div>
+			</div><!-- end of innercontainer -->
+		</div><!-- end of block -->
 	
 
 
