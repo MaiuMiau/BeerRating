@@ -28,7 +28,7 @@ $(document).ready(function(){
 </div>
 	<div class="container" >
 	<div class="innercontainer" >
-		<h1>Here are all your beers</h1>
+	 <h1 th:inline="text">Here are all your beers [[${username}]]!</h1>
 
 	<table >
 		<tr>
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	 <form class="cf" th:object="${beer}"th:action="@{/save/{username}(username=${user.username})}" method="post">
 
 		<div class="half left cf">
-			<label for="name"> Name of the Beer </label>
+			<label for="name"> Name</label>
 			<input type="text" th:field="*{name}" /><br />
 		
 			<label for="alcoholPercentage"> Alcohol %</label>
@@ -60,7 +60,7 @@ $(document).ready(function(){
 			<label for="brewery"> Brewery</label>
 			<input type="text" th:field="*{brewery}" /><br />
 	
-			<label for="beerStyle"> Beer style</label>
+			<label for="beerStyle"> Style</label>
 			<input type="text" th:field="*{beerStyle}" /><br />
 		</div>
 

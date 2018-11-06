@@ -70,7 +70,7 @@ public class BeerController {
 	}
 
 	/** returns frontpage with user info **/
-	@RequestMapping(value = "/frontpage", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/frontpage", method = RequestMethod.GET)
 	public String Frontpaget(Model model, Principal principal) {
 
 		// gets the username from logged in user
@@ -78,7 +78,7 @@ public class BeerController {
 		model.addAttribute("username", username);
 		
 		return "frontpage";
-	}
+	}*/
 	
 	/** returns a list of all beers in database for admin **/
 	@RequestMapping(value = "/beerlist")
@@ -99,9 +99,13 @@ public class BeerController {
 	}
 
 	/** returns a list of usersbeers **/
-	@RequestMapping(value = "/userbeerlist/{username}")
-	public String usersBeerList(Model model, @PathVariable("username") String username) {
+	@RequestMapping(value = "/userbeerlist")
+	public String usersBeerList(Model model, Principal principal) {
 		
+		// gets the username from logged in user
+				String username = principal.getName();
+				model.addAttribute("username", username);
+				
 		User user = userRepository.findByUsername(username);
 		model.addAttribute("user", user);
 
@@ -130,7 +134,7 @@ public class BeerController {
 		beer.setUser(user);
 		beerRepository.save(beer);
 			
-		return "redirect:/userbeerlist/" + user.getUsername();
+		return "redirect:/userbeerlist" ;
 	}
 
 	/** deletes a beer based on id **/

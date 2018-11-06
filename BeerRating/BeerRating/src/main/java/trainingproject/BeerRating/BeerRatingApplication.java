@@ -44,9 +44,9 @@ public class BeerRatingApplication {
 			beerRepository.save(new Beer("Hitachino Nest Dai Dai IPA", 6.0, "Kiuchi Brewery", "IPA", userRepository.findByusername("mikko").get(0)));
 		
 			
-			ratingRepository.save(new Rating("20-12-1978", "BeerHouse", "Botle", "Sweet", 5.0, beerRepository.findByName("Stone's Ginger Joe").get(0)));
-			ratingRepository.save(new Rating("20-12-1978 ", "Hilpea Hauki", "Botle", "Malty", 3.0, beerRepository.findByName("Steamworks Pumpkin Ale").get(0)));	
-			ratingRepository.save(new Rating("20-12-1978", "BeerBeer",  "Can", "Sweet, Chocolate", 4.0,beerRepository.findByName("Samuel Smith Organic Chocolate Stout").get(0)));
+			ratingRepository.save(new Rating("2018-12-12", "BeerHouse", "Botle", "Sweet", 5.0, beerRepository.findByName("Stone's Ginger Joe").get(0)));
+			ratingRepository.save(new Rating("2018-12-12 ", "Hilpea Hauki", "Botle", "Malty", 3.0, beerRepository.findByName("Steamworks Pumpkin Ale").get(0)));	
+			ratingRepository.save(new Rating("2018-12-12", "BeerBeer",  "Can", "Sweet, Chocolate", 4.0,beerRepository.findByName("Samuel Smith Organic Chocolate Stout").get(0)));
 			
 			
 		

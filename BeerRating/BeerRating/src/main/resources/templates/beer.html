@@ -81,7 +81,7 @@ $(document).ready(function(){
 			
 			<tr>
 				<th width="150" align="left"><button sec:authorize="hasAuthority('USER')" id="button1" class="form_button">Add Rating</button></th>
-				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/userbeerlist/{username}(username=${beer.user.username})}">To BeerList</a></td>
+				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/userbeerlist}">To BeerList</a></td>
 			</tr>
 			<tr>
 				<th width="150" align="left"><button id="button2" class="form_button">Show / Hide Ratings</button></th>
@@ -177,13 +177,13 @@ $(document).ready(function(){
 				</div>
 				
 		
-				<label for="servingStyle">Serving style</label> <input type="text"
+				<label for="servingStyle">Serving Style</label> <input type="text"
 					th:field="*{servingStyle}" />
 					<div class="errors" th:if="${#fields.hasErrors('servingStyle')}" th:errors="*{servingStyle}">Error</div>
 					<br />
 				
 
-				<label for="flavorProfile"> flavor Profile</label> <input
+				<label for="flavorProfile"> Flavor Profile</label> <input
 					type="text" th:field="*{flavorProfile}" />
 					<div class="errors" th:if="${#fields.hasErrors('flavorProfile')}" th:errors="*{flavorProfile}">Error</div>
 					<br /><br />
