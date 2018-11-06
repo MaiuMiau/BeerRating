@@ -69,7 +69,7 @@ tr{
 
 .container {
   max-width: 550px;
-  background: rgb(232, 217, 155, 0.95);
+  background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 20px auto;
   
@@ -102,13 +102,16 @@ tr{
 
 .innercontainer {
   max-width: 500px;
-  background: rgb(255, 250, 232, 0.6);
+  /*background: rgb(255, 250, 232, 0.6);*/
+   background: rgb(250, 255, 229, 0.6);
   border-radius: 5px;
+  border:4px double  #474544;
   margin: 5px auto;
-  margin-top: 10px;
+  margin-top: 5px;
+  
   position: relative;
   padding-left: 20px;
-  padding-top: 14px;
+  padding-top: 20px;
   padding-bottom: 10px;
 
 }
@@ -172,7 +175,7 @@ form{
 /* slideToggle DIV */
   #block1 {
   max-width: 550px;
-  background: rgb(232, 217, 155, 0.95);
+  background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 50px auto;
    padding-left: 10px;
@@ -185,7 +188,7 @@ form{
    }
    #block2 {
   max-width: 550px;
-  background: rgb(232, 217, 155, 0.95);
+  background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 50px auto;
    padding-left: 10px;
@@ -204,8 +207,11 @@ input[type='text'], [type="password"] {
 	
     display:block;
     width:200px;
+   
     padding:8px 8px 8px 8px ;
-    border:1px dashed #DBDBDB;
+   /* border:1px dashed #DBDBDB;*/
+    border:1px solid #474544;
+    border-radius: 5px;
     color:#3F3F3F;
 }
 
@@ -276,7 +282,7 @@ label{
   padding: 5px 10px;
 
   border-radius: 5px;
-  border:1px dashed #DBDBDB;
+   border:1px solid #474544;
   background: #FFF;
   
   overflow: hidden;

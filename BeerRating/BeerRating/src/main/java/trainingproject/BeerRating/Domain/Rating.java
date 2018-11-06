@@ -6,7 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,12 +22,26 @@ public class Rating {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private Long id;
-	//Hibernate: insert into rating (beer_id, date, flavor_profile, location, rating, serving_style, id) values (?, ?, ?, ?, ?, ?, ?)
+	 
+	@NotNull
+	//@Pattern(regexp = "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+	//@Pattern(regexp = "{^\\d{4}-\\d{2}-\\d{2}$}")  
+	//@Pattern(regexp = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((18|19|20|21)\\\\d\\\\d)")  
 	private String date;
 	
+	@NotNull
+	@Size(min=5, max=50)
 	private String location;
+	
+	@NotNull
+	@Size(min=3, max=20)
 	private String servingStyle;
+	
+	@Size(min=5, max=50)
 	private String flavorProfile;
+	
+	@NotNull
+	@Range(min = 0, max = 5)
 	private double rate; 
 	
 	 @ManyToOne

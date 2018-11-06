@@ -200,7 +200,11 @@ public class BeerController {
 
 	/** saves the rating that was posted with the addrating form **/
 	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
-	public String save(Rating rating, BindingResult bindingResult, @PathVariable("id") Long beerId ) {
+	public String save(@Valid Rating rating, BindingResult bindingResult, @PathVariable("id") Long beerId ) {
+		
+		if (bindingResult.hasErrors()) {
+			return "redirect:/showbeer/" + beerId;
+        }
 		
 			Beer beer = beerRepository.findById(beerId).get();
 			rating.setBeer(beer);

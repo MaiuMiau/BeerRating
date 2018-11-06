@@ -165,7 +165,9 @@ $(document).ready(function(){
 
 			<div class="half left cf">
 				<label for="date"> Date </label> <input type="text"
-					th:field="*{date}" /><br />
+					th:field="*{date}" placeholder="dd.mm.yyyy"/>
+					<div class="errors" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error</div>
+					<br />
 			
 
 				<label for="location"> Location</label> <input type="text"
@@ -176,11 +178,15 @@ $(document).ready(function(){
 				
 		
 				<label for="servingStyle">Serving style</label> <input type="text"
-					th:field="*{servingStyle}" /><br />
+					th:field="*{servingStyle}" />
+					<div class="errors" th:if="${#fields.hasErrors('servingStyle')}" th:errors="*{servingStyle}">Error</div>
+					<br />
 				
 
 				<label for="flavorProfile"> flavor Profile</label> <input
-					type="text" th:field="*{flavorProfile}" /><br /><br />
+					type="text" th:field="*{flavorProfile}" />
+					<div class="errors" th:if="${#fields.hasErrors('flavorProfile')}" th:errors="*{flavorProfile}">Error</div>
+					<br /><br />
 				
 
 				
