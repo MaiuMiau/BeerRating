@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url('https://fonts.googleapis.com/css?family=Bevan');
+@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 html {
 	background-color:rgb(255, 250, 232);
@@ -37,26 +39,25 @@ body {
 
 table{
   display: inline-block;
- max-width: 480px;
+  max-width: 480px;
  
-  padding: 3px 3px 3px 3px  ;
- /* border:1px dashed #474544;*/
+  
   border-radius: 5px;
-  border-spacing: 8px;
+  border-spacing: 6px;
   position: relative;
   
  
   
 }
 td{
-	padding: 3px 3px 3px 3px  ;
+
 	font-size: 0.975em;px;
   	color: #383635;
     aling:left;
    }
    
    th{
-	padding: 3px 3px 3px 3px  ;
+ 
 	font-size: 0.975em;px;
   	color: black;;
     aling:left;
@@ -64,11 +65,12 @@ td{
    
 
 tr{
+	
 	text-aling:left;
 }
 
 .container {
-  max-width: 550px;
+  max-width: 570px;
   background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 20px auto;
@@ -84,15 +86,17 @@ tr{
 
 
 .headingcontainer {
-  max-width: 550px;
+	text-transform: uppercase;
+	
+  /*font-family: 'Bevan', cursive;*/
+  font-family: 'Cabin Sketch', cursive;
+  max-width: 690px;
   
   margin: 20px auto;
   
   position: relative;
-  
-  
   	text-align:center;
-    font-size:50px;
+    font-size:60px;
    /* text-shadow: 3px 2px rgb(255, 250, 232, 0.6);
     color:black;*/
     
@@ -109,9 +113,11 @@ tr{
   margin: 5px auto;
   margin-top: 5px;
   
+  
   position: relative;
   padding-left: 20px;
-  padding-top: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
   padding-bottom: 10px;
 
 }
@@ -120,7 +126,9 @@ tr{
 	
 	
 	vertical-align: middle;
-            width: 20%;
+            width: 18%;
+             margin-left: 8px;
+              margin-right: 6px;
 }
 
 .musta {
@@ -134,9 +142,9 @@ tr{
 
 
 h1 {
-    
+     font-family: 'Cabin Sketch', cursive;
     /*text-align:center;*/
-    font-size:27px;
+    font-size:39px;
     padding:0;
     margin:0 0 20px 0;
     position:relative;
@@ -174,7 +182,7 @@ form{
 
 /* slideToggle DIV */
   #block1 {
-  max-width: 550px;
+  max-width: 570px;
   background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 50px auto;
@@ -187,7 +195,7 @@ form{
   display:none;  
    }
    #block2 {
-  max-width: 550px;
+  max-width: 570px;
   background: rgb(232, 217, 155, 0.85);
   border-radius: 5px;
   margin: 50px auto;
@@ -240,7 +248,7 @@ label{
 }
 
 .form_button:hover {
-  background: #a3bc72;
+  background: #bfbf46;
   color: #F2F3EB;
 }
 
@@ -264,7 +272,7 @@ label{
 }
 
 .linkki:hover {
-  background: #a3bc72;
+  background: #bfbf46;
   color: #F2F3EB;
 }
 

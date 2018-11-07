@@ -16,10 +16,22 @@
 	<h1 class="headingcontainer">Beer Rating</h1>
 </div>
 	<div class="container" >
+	<div class="innercontainer" >
 	<h1>All the Beers in the database</h1>
+	
+	<table  >
+		<tr>
+			<td><a class="linkki" th:href="@{/userbeerlist}">Back to FrontPage</a></td>
+			
+			<td><form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="linkki" />
+			</form></td>
+		</tr>
+	</table>
+		</div><!-- end of innercontainer -->
 	<div th:each="beer : ${beers}">
-		<br>
-		<table border="1">
+		<div class="innercontainer" >
+		<table >
 			<tr>
 				<th width="150" align="left">Name</th>
 				<td width="350" th:text="${beer.name}"></td>
@@ -43,13 +55,9 @@
 		</table>
 		<br>
 	</div>
-	<a class="linkki" th:href="@{/frontpage}">Back to FrontPage</a>
-<br><br>
-	<div>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="linkki" />
-		</form>
-</div>
+	
+
+</div><!-- end of innercontainer -->
 </div><!-- end of container -->
 
 </body>

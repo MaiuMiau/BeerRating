@@ -24,6 +24,7 @@ public class Rating {
 	private Long id;
 	 
 	@NotNull
+	@Size(min=1, max=20)
 	//@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}")
 	//@Pattern(regexp = "{^\\d{4}-\\d{2}-\\d{2}$}")  
 	
@@ -37,7 +38,7 @@ public class Rating {
 	@Size(min=3, max=20)
 	private String servingStyle;
 	
-	@Size(min=5, max=50)
+	@Size(min=3, max=50)
 	private String flavorProfile;
 	
 	@NotNull

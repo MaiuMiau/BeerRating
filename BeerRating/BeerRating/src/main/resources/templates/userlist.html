@@ -21,10 +21,22 @@
 			[[${#httpServletRequest.remoteUser}]]</h2>
 	</div>
 <div class="container" >
+	<div class="innercontainer" >
 	<h1>All the Users in the database</h1>
+	
+	<table border="1" >
+		<tr>
+			<td><a class="linkki" th:href="@{/userbeerlist}">Back to FrontPage</a></td>
+			
+			<td><form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="linkki" />
+			</form></td>
+		</tr>
+	</table>
+	</div><!-- end of innercontainer -->
 	<div th:each="user: ${users}">
-		<br>
-		<table border="1">
+		<div class="innercontainer" >
+		<table >
 			<tr>
 				<th width="300" align="left">Username</th>
 				
@@ -37,16 +49,12 @@
 
 			
 		</table>
-		<br>
-	</div>
-	<br>
-		<a class="linkki" th:href="@{/frontpage}">Back to FrontPage</a>
-	<div>
-	<br>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="linkki" />
-		</form>
+		
+	
+	
+		</div><!-- end of innercontainer -->
 </div>
+
 </div><!-- end of container -->
 
 </body>

@@ -125,24 +125,35 @@ public class BeerController {
 
 	
 	/** saves users beer that was posted with the form from userbeerlist page**/
-	@RequestMapping(value = "/save/{username}", method = RequestMethod.POST)
-	public String savebeerforuser(Beer beer,Model model, @PathVariable("username") String username) {
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public String savebeerforuser(@Valid Beer beer, BindingResult bindingResult, Principal principal, Model model) {
 		
-		model.addAttribute("username", username);
-		User user = userRepository.findByUsername(username);
-		
-		beer.setUser(user);
-		beerRepository.save(beer);
+		 if (bindingResult.hasErrors()) {
+	        	return "redirect:./userbeerlist";
+	        }
+		 	
+		// gets the username from logged in user
+			String username = principal.getName();
+			model.addAttribute("username", username);
+			
+			User user = userRepository.findByUsername(username);
+			model.addAttribute("user", user);
+		 
+		 	beerRepository.save(beer);
+		 	
+			beer.setUser(user);
+			beerRepository.save(beer);
+				
 			
 		return "redirect:/userbeerlist" ;
 	}
 
 	/** deletes a beer based on id **/
-	@RequestMapping(value = "/delete/{id}/{username}", method = RequestMethod.GET)
-	public String deleteBeer(@PathVariable("id")Long beerId, Model model, @PathVariable("username") String username) {
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteBeer(@PathVariable("id")Long beerId, Model model) {
 		
 		beerRepository.deleteById(beerId);
-		return "redirect:/userbeerlist/" + username;
+		return "redirect:/userbeerlist/";
 	}
 
 	/** shows a beer and its ratings based on beerid **/
@@ -207,10 +218,13 @@ public class BeerController {
 	public String save(@Valid Rating rating, BindingResult bindingResult, @PathVariable("id") Long beerId ) {
 		
 		if (bindingResult.hasErrors()) {
+			System.out.println("TAPAHTUI VIRHE FORMISSA");
 			return "redirect:/showbeer/" + beerId;
+			
         }
-		
+		System.out.println("MENEE LÄPI MUTTA EI TALLENNEA FORMISSA");
 			Beer beer = beerRepository.findById(beerId).get();
+			
 			rating.setBeer(beer);
 			ratingRepository.save(rating);
 			

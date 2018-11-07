@@ -15,6 +15,7 @@
 	<h1 class="headingcontainer">Beer Rating</h1>
 </div>
 <div class="container" >
+<div class="innercontainer" >
 <h1> Edit beer</h1>
 	<form class="cf" th:object="${beer}" th:action="@{../saveedited}" action="#"method="post">
 		
@@ -48,6 +49,7 @@
 			<input class="form_button" type="submit" value="Save"></input>
 		</div>
 	</form>
+	</div><!-- end of innercontainer -->
 	</div><!-- end of container -->
 </body>
 </html>

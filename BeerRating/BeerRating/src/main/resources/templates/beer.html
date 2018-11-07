@@ -33,7 +33,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="headingcontainer" >
-<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/beige.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/beige.png}"/></h1>
+<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
 </div>
 <div class="container" >
 	<div class="innercontainer" >
@@ -58,7 +58,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
-				<td ><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/delete/{id}/{username}(id=${beer.beerId},username=${beer.user.username})}">Delete</a></td>
+				<td ><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
 			</tr>
 			<tr>
 			<!-- 		<td style="visibility:hidden" th:text="${beer.user.username}"></td>-->
@@ -85,14 +85,18 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<th width="150" align="left"><button id="button2" class="form_button">Show / Hide Ratings</button></th>
-				<td><a class="linkki" th:href="@{/frontpage}">To FrontPage</a></td>
+				
 			</tr>
 			
 			
 	</table>
 	
 	</div><!-- end of innercontainer -->
-	
+	<table >
+	<tr>
+	<td width="500" align="right"><a  sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/userbeerlist}">To BeerList</a></td>
+	</tr>
+	</table>
 </div><!-- end of container -->
 
 	<!-- if ratings is empty -->
@@ -187,9 +191,7 @@ $(document).ready(function(){
 					type="text" th:field="*{flavorProfile}" />
 					<div class="errors" th:if="${#fields.hasErrors('flavorProfile')}" th:errors="*{flavorProfile}">Error</div>
 					<br /><br />
-				
 
-				
 				<!-- LIKE -->
 				<label for="rating"> Rating</label>
 				<section id="like" class="rating">
