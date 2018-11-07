@@ -39,11 +39,7 @@ public class BeerController {
 	@Autowired
 	private UserRepository userRepository;
 
-	/** RESTful service to get all ratings **/
-	@RequestMapping(value = "/ratings", method = RequestMethod.GET)
-	public @ResponseBody List<Rating> ratingListRest() {
-		return (List<Rating>) ratingRepository.findAll();
-	}
+	
 
 	/** RESTful service to get all beers **/
 	@RequestMapping(value = "/beers", method = RequestMethod.GET)
@@ -51,11 +47,7 @@ public class BeerController {
 		return (List<Beer>) beerRepository.findAll();
 	}
 	
-	/** RESTful service to get all users **/
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public @ResponseBody List<User> userListRest() {
-		return (List<User>) userRepository.findAll();
-	}
+	
 
 	/** login form **/
 	@RequestMapping(value = "/login")
@@ -90,13 +82,7 @@ public class BeerController {
 		return "beerlist";
 	}
 	
-	/** returns a list of all users in database for admin **/
-	@RequestMapping(value = "/userlist")
-	public String userlist(Model model) {
-		 model.addAttribute("users", userRepository.findAll());
-		
-		return "userlist";
-	}
+	
 
 	/** returns a list of usersbeers **/
 	@RequestMapping(value = "/userbeerlist")
@@ -129,7 +115,7 @@ public class BeerController {
 	public String savebeerforuser(@Valid Beer beer, BindingResult bindingResult, Principal principal, Model model) {
 		
 		 if (bindingResult.hasErrors()) {
-	        	return "redirect:./userbeerlist";
+	        	return "addbeer";
 	        }
 		 	
 		// gets the username from logged in user
@@ -211,51 +197,16 @@ public class BeerController {
 		 	return "redirect:/showbeer/" + beer.getBeerId();
 	    }
 		
-		
-
-	/** saves the rating that was posted with the addrating form **/
-	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)
-	public String save(@Valid Rating rating, BindingResult bindingResult, @PathVariable("id") Long beerId ) {
-		
-		if (bindingResult.hasErrors()) {
-			System.out.println("TAPAHTUI VIRHE FORMISSA");
-			return "redirect:/showbeer/" + beerId;
-			
-        }
-		System.out.println("MENEE LÄPI MUTTA EI TALLENNEA FORMISSA");
-			Beer beer = beerRepository.findById(beerId).get();
-			
-			rating.setBeer(beer);
-			ratingRepository.save(rating);
-			
-		return "redirect:/showbeer/" + beer.getBeerId();
-		
-		
-	}
-
-	/** deletes rating based on id **/
-	@RequestMapping(value = "/deleterating/{ratingid}/{beerid}", method = RequestMethod.GET)
-	public String deleteRating(@PathVariable("ratingid") Long ratingid, @PathVariable("beerid") Long beerid,
-			Model model) {
-		ratingRepository.deleteById(ratingid);
-		
-		return "redirect:/showbeer/" + beerid;
-	}
 
 	/** returns a empty form for adding beers **/ // ei ehkä tarvita enää
-	/*
-	 * @RequestMapping(value = "/add") public String addBeer(Model model) {
-	 * model.addAttribute("beer", new Beer()); return "addbeer"; }
-	 */
+	
+	  @RequestMapping(value = "/add") public String addBeer(Model model) {
+	 model.addAttribute("beer", new Beer());
+	 
+	 return "addbeer"; 
+	 }
+	 
 
-	/** returns a empty form for adding rating to a beer **/ // ei ehkä tarvita enää
-	/*
-	 * @RequestMapping(value = "/addratings/{id}") public String addrating(Model
-	 * model, @PathVariable("id") Long beerId) {
-	 * 
-	 * model.addAttribute("rating", new Rating()); Beer beer =
-	 * beerRepository.findById(beerId).get(); model.addAttribute("beer", beer);
-	 * return "addrating"; }
-	 */
+	
 
 }

@@ -1,5 +1,7 @@
 package trainingproject.BeerRating.WebController;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import trainingproject.BeerRating.Domain.SignupForm;
 import trainingproject.BeerRating.Domain.User;
@@ -21,6 +24,21 @@ import trainingproject.BeerRating.Domain.UserRepository;
 public class UserController {
 	@Autowired
     private UserRepository userRepository;
+	
+	
+	/** RESTful service to get all users **/
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public @ResponseBody List<User> userListRest() {
+		return (List<User>) userRepository.findAll();
+	}
+	
+	/** returns a list of all users in database for admin **/
+	@RequestMapping(value = "/userlist")
+	public String userlist(Model model) {
+		 model.addAttribute("users", userRepository.findAll());
+		
+		return "userlist";
+	}
 	
 	 @RequestMapping(value = "signup")
 	    public String addStudent(Model model){
@@ -41,16 +59,16 @@ public class UserController {
 	    	if (!bindingResult.hasErrors()) { // validation errors
 	    		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match		
 		    		String pwd = signupForm.getPassword();
-			    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();// antaa selkokielisen salasanan cryptattavaksi
-			    	String hashPwd = bc.encode(pwd);//cryptattu salasana
+			    	BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
+			    	String hashPwd = bc.encode(pwd);
 		
-			    	User newUser = new User(); //luodaan user olia
-			    	newUser.setPasswordHash(hashPwd);//Asettetaan sille salasana
+			    	User newUser = new User(); 
+			    	newUser.setPasswordHash(hashPwd);
 			    	newUser.setUsername(signupForm.getUsername());
 			    	newUser.setRole("USER");
 			    	if (userRepository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
 			    		userRepository.save(newUser);
-			    		//model.addAttribute(userRepository.save(newUser));
+			    		
 			    	
 			    	}
 			    	else {
@@ -64,7 +82,7 @@ public class UserController {
 	    		}
 	    	}
 	    	else {
-	    		return "signup";// virhetilantessa palataan signuppiin
+	    		return "signup";// If erros return signup
 	    	}
 	    	return "redirect:/login";    	
 	    }    

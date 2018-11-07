@@ -16,13 +16,13 @@
 </div>
 <div class="container" >
 <div class="innercontainer" >
-<h1> Edit beer</h1>
+<h1> Edit</h1>
 	<form class="cf" th:object="${beer}" th:action="@{../saveedited}" action="#"method="post">
 		
 			<input type="hidden" th:field="*{beerId}"/> 
 		
 		<div class="half left cf">
-			<label for="name"> Name of the Beer </label>
+			<label for="name"> Name </label>
 			<input type="text" th:field="*{name}" /><br />
 				<div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
 		
@@ -35,7 +35,7 @@
 			<input type="text" th:field="*{brewery}" /><br />
 				<div class="errors" th:if="${#fields.hasErrors('brewery')}" th:errors="*{brewery}">Error</div>
 	
-			<label for="beerStyle"> Beer style</label>
+			<label for="beerStyle"> Beer Style</label>
 			<input type="text" th:field="*{beerStyle}" /><br />
 				<div class="errors" th:if="${#fields.hasErrors('beerStyle')}" th:errors="*{beerStyle}">Error</div>
 		</div>
@@ -44,12 +44,20 @@
 			<input type="hidden" th:field="*{user}" > 
 		</div>
 		
-
-		<div style="clear: both; display: block; height: 15px;">
 			<input class="form_button" type="submit" value="Save"></input>
-		</div>
+		
 	</form>
 	</div><!-- end of innercontainer -->
 	</div><!-- end of container -->
+	
+	<div class="logoutcontainer">
+		<a sec:authorize="hasAuthority('USER')" class="linkkiOut" th:href="@{/userbeerlist}">To BeerList</a>
+	</div>
+
+	<div class="logoutcontainer">
+		<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="linkkiOut" />
+				</form>
+	</div>
 </body>
 </html>

@@ -8,10 +8,11 @@
 <body>
 <body>
 <div class="headingcontainer" >
-<h1 class="headingcontainer">Beer Rating</h1>
+<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
 </div>
 <div class="container" >
-	<h1>Sign-up</h1>
+	<div class="innercontainer" >
+	<h1>Sign Up</h1>
      <div>
 		<form  class="cf" th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div class="half left cf">
@@ -29,7 +30,8 @@
 			<input  class="form_button" type="submit"  value="Signup"></input>		
 		</form>
 	</div>
-	</div>
+	</div><!-- end of innercontainer -->
+	</div><!-- end of container -->
 </body>
 
 </body>

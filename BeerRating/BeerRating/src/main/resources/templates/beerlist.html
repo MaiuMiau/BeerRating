@@ -12,23 +12,30 @@
 
 </head>
 <body>
-<div class="headingcontainer" >
-	<h1 class="headingcontainer">Beer Rating</h1>
-</div>
+	<div class="headingcontainer" >
+		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
+	</div>
+	<div>
+		<h2 th:inline="text">[[${#httpServletRequest.remoteUser}]]</h2>
+	</div>
 	<div class="container" >
 	<div class="innercontainer" >
 	<h1>All the Beers in the database</h1>
 	
-	<table  >
-		<tr>
-			<td><a class="linkki" th:href="@{/userbeerlist}">Back to FrontPage</a></td>
-			
-			<td><form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="linkki" />
-			</form></td>
-		</tr>
-	</table>
+	
 		</div><!-- end of innercontainer -->
+		</div><!-- end of innercontainer -->
+		
+		<div class="logoutcontainer">
+				 <a class="linkkiOut" th:href="@{/userbeerlist}">FrontPage</a>
+		</div>
+
+		<div class="logoutcontainer">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="linkkiOut" />
+				</form>
+		</div>
+		<div class="container" >
 	<div th:each="beer : ${beers}">
 		<div class="innercontainer" >
 		<table >

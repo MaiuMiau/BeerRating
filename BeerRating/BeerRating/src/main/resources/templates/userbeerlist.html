@@ -4,20 +4,18 @@
 <head>
 <meta charset="ISO-8859-1">
 
-
 <title>FrontPage</title>
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#button1").click(function(){
-    
-        $("#block1").slideToggle();
-    });
-});
- 
+	<script>
+		$(document).ready(function() {
+			$("#button1").click(function() {
+
+				$("#block1").slideToggle();
+			});
+		});
 </script>
 <title>UsersBeerList</title>
 </head>
@@ -26,48 +24,57 @@ $(document).ready(function(){
 <div class="headingcontainer" >
 	<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
 </div>
+	
+	<!-- For user -->
 	<div class="container" >
-	<div class="innercontainer" >
-	<div sec:authorize="hasAuthority('USER')" th:if="${!beers.empty}">
-	 <h1 th:inline="text">Here are all your beers [[${username}]]!</h1>
-	 </div>
-	 <div  sec:authorize="hasAuthority('USER')" th:if="${beers.empty}" >
+		<div class="innercontainer" >
 			
-					<h1>Welcome [[${username}]]!!</h1>
-				
-		</div><!-- end of th:ifr -->
-
-	<table  >
+			<!-- if beers is Not empty -->
+			<div sec:authorize="hasAuthority('USER')" th:if="${!beers.empty}">
+	 			<h1 th:inline="text">Here are all your beers [[${username}]]!</h1>
+	 		</div> <!-- end of th:if -->
+	 		
+	 		<!-- if beers is empty -->
+	 		<div  sec:authorize="hasAuthority('USER')" th:if="${beers.empty}" >
+				<h1>Welcome [[${username}]]!!</h1>
+			</div><!-- end of th:if -->
+	
+	<!-- For User -->
+	<table sec:authorize="hasAuthority('USER')" >
 		<tr>
-			<td></td>
-			<td ><button id="button1" class="form_button"  >New Beer</button></td>
-			
-			<td><form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="linkki" />
-			</form></td>
+			<th width="480" align="left">It`s always a good time for a new one!</th>
 		</tr>
+		<tr>
+			<!--<td ><button id="button1" class="form_button" >New Beer</button></td> -->
+			<td><a class="linkki" th:href="@{/add}">New Beer</a></td>
+		</tr>
+		
 	</table>
 	
+	<!-- For Admin -->
 	<div sec:authorize="hasAuthority('ADMIN')">
-	<h1 th:inline="text">welcome [[${username}]]!</h1>
+		<h1 th:inline="text">welcome [[${username}]]!</h1>
 	
-	<table  >
-		<tr>
-			<td><a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/userlist}">Show all users</a></td>
-			<td><a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/beerlist}">Show all beers</a></td>
-			<td><form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="linkki" />
-			</form></td>
-		</tr>
-	</table>
-		</div><!-- end of sec:authorize -->
+		<table  >
+			<tr>
+				<td><a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/userlist}">Show all users</a></td>
+				<td><a sec:authorize="hasAuthority('ADMIN')" class="linkki" th:href="@{/beerlist}">Show all beers</a></td>
+			</tr>
+		</table>
+		</div><!-- end of sec:authorize admin-->
 	</div><!-- end of innercontainer -->
 </div><!-- end of container -->
 
-	<div id="block1">
+<div class="logoutcontainer1">
+<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="linkkiOut" />
+				</form>
+</div>
+
+<!-- Add new Beer -->
+<!--<div id="block1">
 	<div class="innercontainer" >
-	
-<h1>Add a new Beer</h1>
+		<h1>Add a new Beer</h1>
 	 <form class="cf" th:object="${beer}"th:action="@{/save}" method="post">
 
 		<div class="half left cf">
@@ -97,14 +104,14 @@ $(document).ready(function(){
 
 	</form>
 	</div><!-- end of innercontainer -->
-</div>
+<!--</div> <!-- end of block1 --> 
 
 
 		<!-- if beers is empty -->
 		<div th:if="${beers.empty}"  sec:authorize="hasAuthority('USER')">
 			<div class="container" >
 				<div class="innercontainer" >
-					<h1>You dont have any beers yet!!</h1>
+					<h2>You dont have any beers yet!!</h2>
 				</div><!-- end of innercontainer -->
 			</div><!-- end of container -->
 		</div><!-- end of th:ifr -->
@@ -114,36 +121,31 @@ $(document).ready(function(){
 	<!-- if beers is Not empty -->
 	<div th:if="${!beers.empty}">
 		<div class="container" >
-			
 			<div th:each="beer : ${beers}">
-			<div class="innercontainer" >
-		<img class= "musta" width="80" th:src="@{/images/korkki.png}"/>
-		<table >
-			<tr>
-				<th width="100" align="left">Name:</th>
-				<td width="260" th:text="${beer.name}"></td>
-				
-			<!--  <th width="200" align="left">username:</th> -->	
-			</tr>
+				<div class="innercontainer" >
+					<img class= "musta" width="80" th:src="@{/images/korkki.png}"/>
+					<table>
+						<tr>
+							<th width="100" align="left">Name:</th>
+							<td width="260" th:text="${beer.name}"></td>
+							<!--  <th width="200" align="left">username:</th> -->
+						</tr>
 
-			<tr>
-				<th width="100" align="left">Brewery:</th>
-				<td width="260"th:text="${beer.brewery}"></td>
-			<!-- <td th:text="${beer.user.username}"></td> -->	
-			</tr>
+						<tr>
+							<th width="100" align="left">Brewery:</th>
+							<td width="260" th:text="${beer.brewery}"></td>
+							<!-- <td th:text="${beer.user.username}"></td> -->
+						</tr>
 
-			<tr>
-
-				<td></td>
-				<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
-				<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
-				<td align="right"><a class="linkki"
-					th:href="@{/showbeer/{id}(id=${beer.beerId})}">Details</a></td>
-			</tr>
-		</table>
-		</div><!-- end of innercontainer -->
-		<br>
-		</div>
+						<tr>
+							<td></td>
+							<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
+							<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
+							<td align="right"><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Details</a></td>
+						</tr>
+					</table>
+				</div><!-- end of innercontainer -->
+			</div><!-- end of th:each -->
 		</div><!-- end of container -->
 	</div><!-- end of th:ifr -->
 	
