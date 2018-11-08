@@ -47,8 +47,7 @@ public class Beer {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "beer")
 	private List<Rating> ratings;
 
-	public Beer() {
-	}
+	public Beer() {}
 
 	// Parameterized constructor
 	public Beer(String name, double alcoholPercentage, String brewery, String beerStyle, User user) {
@@ -61,6 +60,15 @@ public class Beer {
 
 	}
 
+	// Parameterized constructor
+		public Beer(String name, double alcoholPercentage, String brewery, String beerStyle) {
+			super();
+			this.name = name;
+			this.alcoholPercentage = alcoholPercentage;
+			this.brewery = brewery;
+			this.beerStyle = beerStyle;
+			
+		}
 	public User getUser() {
 		return user;
 	}

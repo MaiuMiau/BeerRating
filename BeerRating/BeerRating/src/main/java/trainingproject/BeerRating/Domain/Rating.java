@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,14 +24,14 @@ public class Rating {
 	private Long id;
 	 
 	@NotNull
-	@Size(min=1, max=20)
-	//@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}")
+	@Size(min=1, max=12)// ei voi laittaa 10 koska commandlinerunner laskee myös string parametrin lainausmerkit
+	//@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}") ei toimi
 	//@Pattern(regexp = "{^\\d{4}-\\d{2}-\\d{2}$}")  
 	
 	private String date;
 	
 	@NotNull
-	@Size(min=5, max=50)
+	@Size(min=3, max=50)
 	private String location;
 	
 	@NotNull

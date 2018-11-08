@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
@@ -46,6 +48,12 @@ public class BeerController {
 	public @ResponseBody List<Beer> beerListRest() {
 		return (List<Beer>) beerRepository.findAll();
 	}
+	
+	  /** RESTful service to get beer by id **/
+    @RequestMapping(value="/beer/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Beer> findBeerkRest(@PathVariable("id") Long beerId) {	
+    	return beerRepository.findById(beerId);
+    }  
 	
 	
 
@@ -101,7 +109,7 @@ public class BeerController {
 		model.addAttribute("beers", beers);
 		
 		// for adding new beer with Jqueryform
-		model.addAttribute("beer", new Beer());
+		//model.addAttribute("beer", new Beer());
 		
 		/*long id = user.getId();
 		System.out.println("TÄÄLLÄ TOIVOTTAVASTI OLSISI USER ID!!! " + id);*/
@@ -198,7 +206,7 @@ public class BeerController {
 	    }
 		
 
-	/** returns a empty form for adding beers **/ // ei ehkä tarvita enää
+	/** returns a empty form for adding beers **/ 
 	
 	  @RequestMapping(value = "/add") public String addBeer(Model model) {
 	 model.addAttribute("beer", new Beer());

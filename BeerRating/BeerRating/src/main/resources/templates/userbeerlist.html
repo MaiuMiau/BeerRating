@@ -123,17 +123,17 @@
 		<div class="container" >
 			<div th:each="beer : ${beers}">
 				<div class="innercontainer" >
-					<img class= "musta" width="80" th:src="@{/images/korkki.png}"/>
-					<table>
+					<img class= "musta"  th:src="@{/images/korkki.png}"/>
+					<table class= "infotable">
 						<tr>
-							<th width="100" align="left">Name:</th>
-							<td width="260" th:text="${beer.name}"></td>
+							<th width="80" align="left">Name</th>
+							<td width="300" th:text="${beer.name}"></td>
 							<!--  <th width="200" align="left">username:</th> -->
 						</tr>
 
 						<tr>
-							<th width="100" align="left">Brewery:</th>
-							<td width="260" th:text="${beer.brewery}"></td>
+							<th width="80" align="left">Brewery</th>
+							<td width="300" th:text="${beer.brewery}"></td>
 							<!-- <td th:text="${beer.user.username}"></td> -->
 						</tr>
 

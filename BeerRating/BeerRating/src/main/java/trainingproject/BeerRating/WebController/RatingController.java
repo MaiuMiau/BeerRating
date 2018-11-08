@@ -1,6 +1,7 @@
 package trainingproject.BeerRating.WebController;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,7 +18,6 @@ import trainingproject.BeerRating.Domain.Beer;
 import trainingproject.BeerRating.Domain.BeerRepository;
 import trainingproject.BeerRating.Domain.Rating;
 import trainingproject.BeerRating.Domain.RatingRepository;
-import trainingproject.BeerRating.Domain.UserRepository;
 
 @Controller
 public class RatingController {
@@ -30,15 +30,18 @@ public class RatingController {
 	@Autowired
 	private RatingRepository ratingRepository;
 
-	/** adding userRepository **/
-	@Autowired
-	private UserRepository userRepository;
-
+	
 	/** RESTful service to get all ratings **/
 	@RequestMapping(value = "/ratings", method = RequestMethod.GET)
 	public @ResponseBody List<Rating> ratingListRest() {
 		return (List<Rating>) ratingRepository.findAll();
 	}
+	
+	  /** RESTful service to get rating by id **/
+    @RequestMapping(value="/rating/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Rating> findratingBeerkRest(@PathVariable("id") Long ratingId) {	
+    	return ratingRepository.findById(ratingId);
+    }  
 	
 	/** saves the rating that was posted with the addrating form **/
 	@RequestMapping(value = "/saveratings/{id}", method = RequestMethod.POST)

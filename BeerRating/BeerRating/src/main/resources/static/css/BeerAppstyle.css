@@ -34,24 +34,36 @@ body {
 	font-size: 0.875em;
 }
 
+.infotable {
+	display: inline-block;
+	max-width: 340px;
+	border-radius: 5px;
+	border-spacing: 6px;
+	position: relative;
+	
+}
+
 table {
 	display: inline-block;
 	max-width: 480px;
 	border-radius: 5px;
 	border-spacing: 6px;
 	position: relative;
+	
 }
 
 td {
-	font-size: 0.975em; px;
+	font-size: 1.075em; px;
 	color: #383635;
 	aling: left;
+	
 }
 
 th {
-	font-size: 0.975em; px;
+	font-size: 1.075em; px;
 	color: black;;
 	aling: left;
+	padding-right: 5px;
 }
 
 tr {
@@ -62,12 +74,12 @@ tr {
 	max-width: 570px;
 	background: rgb(232, 217, 155, 0.85);
 	border-radius: 5px;
-	margin: 20px auto;
+	margin: 10px auto;
 	position: relative;
 	padding-left: 10px;
 	padding-right: 10px;
-	padding-top: 14px;
-	padding-bottom: 10px;
+	padding-top: 24px;
+	padding-bottom: 24px;
 }
 
 .headingcontainer {
@@ -93,7 +105,7 @@ tr {
 	border: 4px double #474544;
 	margin: 5px auto;
 	position: relative;
-	padding-left: 25px;
+	padding-left: 20px;
 	padding-right: 5px;
 	padding-top: 15px;
 	padding-bottom: 10px;
@@ -126,13 +138,15 @@ tr {
 .musta {
 	vertical-align: top;
 	width: 18%;
+	position: realtive;
 }
 
 .pullo {
-	vertical-align: top;
+	vertical-align:  top;
 	
 	display: inline-block;
-	width: 40%;
+	width: 20%;
+	margin-bottom: 5px;
 }
 
 h1 {
@@ -229,7 +243,7 @@ label {
 	font-size: 0.675em;
 	/*font-weight: bold;*/
 	outline: none;
-	padding: 8px 8px;
+	padding: 5px 5px;
 	text-transform: uppercase;
 }
 
@@ -250,7 +264,7 @@ label {
 	font-size: 0.675em;
 	/*font-weight: bold;*/
 	outline: none;
-	padding: 8px 8px;
+	padding: 5px 5px;
 	text-transform: uppercase;
 	text-align: center;
 	text-decoration: none;
@@ -310,36 +324,7 @@ label {
   display: none;
 }
 
-/* - - - - - RATE tähti*/
-#rate {
-  top: -65px;
-}
-#rate:not(:checked) > label {
-  cursor:pointer;
-  float: right;
-  width: 30px;
-  height: 30px;
-  display: block;
- 
-  
-  color: rgba(0, 135, 211, .4);
-  line-height: 33px;
-  text-align: center;
-}
-#rate:not(:checked) > label:hover,
-#rate:not(:checked) > label:hover ~ label {
-  color: rgba(0, 135, 211, .6);
-}
-#rate > input:checked + label:hover,
-#rate > input:checked + label:hover ~ label,
-#rate > input:checked ~ label:hover,
-#rate > input:checked ~ label:hover ~ label,
-#rate > label:hover ~ input:checked ~ label {
-  color: rgba(0, 135, 211, .8);
-}
-#rate > input:checked ~ label {
-  color: rgb(0, 135, 211);
-}
+
 /* - - - - - LIKE sydän*/
 #like {
   bottom: -65px;

@@ -39,26 +39,45 @@ $(document).ready(function(){
 	<div class="innercontainer" >
 		<h1 th:text="${beer.name}"></h1>
 	
-		<table  >
+		<table class= "infotable">
 			<tr>
 				<th align="left">Brewery</th>
-				<td  width="380" th:text="${beer.brewery}"></td>
+				<td  width="250" th:text="${beer.brewery}"></td>
 			</tr>
-			</table>
 			
-		<table >
+			
+		
 			<tr>
-				<th width="80" align="left">Alcohol %</th>
-				<td  width="165"  th:text="${beer.alcoholPercentage}"></td>
+				<th width="90" align="left">Alcohol %</th>
+				<td  width="150"  th:text="${beer.alcoholPercentage}"></td>
 			
 			</tr>
 			<tr>
-				<th width="80" align="left">Style</th>
-				<td width="165"   th:text="${beer.beerStyle}"></td>
+				<th width="90" align="left">Style</th>
+				<td width="150"   th:text="${beer.beerStyle}"></td>
 			</tr>
 			<tr>
 				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
 				<td ><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
+			</tr>
+			
+			<tr>
+				<td>.......................</td>
+				<td>........................ </td>
+			</tr>
+			
+			<tr>
+				<th align="left">Ratings</th>
+				<th align="left">Average</th>
+			</tr>
+			<tr>
+				<td th:text="${ratings.size()}"></td>
+				<td th:text="${average}"></td>
+			</tr>
+			
+			<tr>
+				<td><button sec:authorize="hasAuthority('USER')" id="button1" class="form_button">Add Rating</button></td>
+				<td><button id="button2" class="form_button">Show/Hide Ratings</button></td>
 			</tr>
 			<tr>
 			<!-- 		<td style="visibility:hidden" th:text="${beer.user.username}"></td>-->
@@ -66,10 +85,11 @@ $(document).ready(function(){
 			</tr>
 			
 		</table>
-		<img width="270" class="pullo" th:src="@{/images/pullo4.png}"/>
+		
+		<img width="270" class="pullo" th:src="@{/images/pullo7.png}"/>
 	</div><!-- end of innercontainer -->
-			<div class="innercontainer" >
-		<table>
+		<!--	<div class="innercontainer" >
+		<table border="1">
 			<tr>
 				<th width="150" align="left">Rating count</th>
 				<th width="250" align="left">Rating average</th>
@@ -126,17 +146,17 @@ $(document).ready(function(){
 							<td th:text="${rating.rate}"></td>
 						</tr>
 						<tr>
-							<th width="120" align="left">Location</th>
-							<td width="360" th:text="${rating.location}"></td>
+							<th width="130" align="left">Location</th>
+							<td width="350" th:text="${rating.location}"></td>
 							<!--  <th width="200" align="left">username:</th> -->
 						</tr>
 						<tr>
-							<th width="120" align="left">Serving Style</th>
-							<td width="360" th:text="${rating.servingStyle}"></td>
+							<th width="130" align="left">Serving Style</th>
+							<td width="350" th:text="${rating.servingStyle}"></td>
 						</tr>
 						<tr>
-							<th width="120" align="left">Flavor Profile</th>
-							<td width="360" th:text="${rating.flavorProfile}"></td>
+							<th width="130" align="left">Flavor Profile</th>
+							<td width="350" th:text="${rating.flavorProfile}"></td>
 						</tr>
 						<tr>
 							<td></td>
