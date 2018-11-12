@@ -1,6 +1,7 @@
 package trainingproject.BeerRating.WebController;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.Collections;
 
 import java.util.List;
@@ -154,13 +155,15 @@ public class BeerController {
 			sum = sum + allRates[i];
 
 			double average = (sum / allRates.length);
-			model.addAttribute("average", average);
+			DecimalFormat desimaalit = new DecimalFormat("0.00");
+			
+			
+			model.addAttribute("average", desimaalit.format(average));
 		}
 
 		return "beer";
 	}
 	
-
 	/** edits a beer based on id **/
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBeer(@PathVariable("id") Long beerId, Model model) {

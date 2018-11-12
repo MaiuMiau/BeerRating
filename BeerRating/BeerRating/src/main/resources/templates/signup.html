@@ -19,14 +19,14 @@
 		<form  class="cf" th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div class="half left cf">
 				<label> Username :<input type="text" th:field="*{username}"/></label>
-				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+				<p  class="errors" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
 			</div>
 			<div class="half right cf">
 				<label> Password :<input type="password" th:field="*{password}"/></label>
-				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+				<p  class="errors" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
 				 <br/>	
 				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" /></label>
-				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+				<p  class="errors" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
 			</div>
 			
 			<input  class="form_button" type="submit"  value="Signup"></input>		

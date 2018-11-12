@@ -1,7 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-@import url('https://fonts.googleapis.com/css?family=Bevan');
-
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 html {
@@ -20,7 +18,6 @@ body {
 	max-width: 700px;
 	min-height: 670px;
 	position: relative;
-	/*background:url(http://myy.haaga-helia.fi/~a1704485/beerrating/IMG_0678.JPG)center ;*/
 	background-image: url('../images/back7.JPG');
 	background-position: center top;
 	background-repeat: repeat;
