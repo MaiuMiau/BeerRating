@@ -1,7 +1,6 @@
 package trainingproject.BeerRating.Domain;
 
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,27 +8,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	 @Column(name = "id", nullable = false, updatable = false)// ei saa olla tyhjä
+	 @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 	
-	 // Username with unique constraint
-    @Column(name = "username", nullable = false, unique = true)// pitää olla uniikki
+	
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "password", nullable = false)
-    private String passwordHash;// salasana on cryptattu
+    private String passwordHash;
     
-    
-    
-
-    @Column(name = "role", nullable = false)// rooli ei saa olla tyhjä
+    @Column(name = "role", nullable = false)
     private String role;
     
     @JsonIgnore
@@ -51,13 +46,8 @@ public class User {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
-		
 		this.role = role;
 	}
-
-	
-
-	
 
 	public Long getId() {
 		return id;

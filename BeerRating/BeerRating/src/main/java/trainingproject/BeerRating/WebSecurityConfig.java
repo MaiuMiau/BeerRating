@@ -8,10 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import trainingproject.BeerRating.WebController.UserDetailServiceImpl;
-
-
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -21,10 +18,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	    private UserDetailServiceImpl userDetailsService;	
 	
-	
 	protected void configure(HttpSecurity http) throws Exception {
 		 http
-	        .authorizeRequests().antMatchers("/css/**", "/images/**").permitAll() // Enable css when logged out
+	        .authorizeRequests().antMatchers("/css/**", "/images/**").permitAll() 
 	        .and()
 	        .authorizeRequests()
 	        

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Sing up to beer application</title>
+<title>SingUp</title>
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
 </head>
+
 <body>
-<body>
-<div class="headingcontainer" >
-<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
-</div>
-<div class="container" >
-	<div class="innercontainer" >
-	<h1>Sign Up</h1>
-     <div>
+	<div class="headingcontainer" >
+		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
+	</div>
+	
+	<div class="container" >
+		<div class="innercontainer" >
+			<h1>Sign Up</h1>
+    			
 		<form  class="cf" th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div class="half left cf">
 				<label> Username :<input type="text" th:field="*{username}"/></label>
@@ -29,10 +31,14 @@
 			
 			<input  class="form_button" type="submit"  value="Signup"></input>		
 		</form>
-	</div>
-	</div><!-- end of innercontainer -->
+	
+		</div><!-- end of innercontainer -->
 	</div><!-- end of container -->
+	
+	<div class="logoutcontainer1">
+		<a class="linkkiOut" th:href="@{/login}">Back</a>
+	</div>
 </body>
 
-</body>
+
 </html>

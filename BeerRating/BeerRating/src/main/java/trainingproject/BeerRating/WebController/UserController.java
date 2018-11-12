@@ -1,10 +1,9 @@
 package trainingproject.BeerRating.WebController;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,26 +12,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import trainingproject.BeerRating.Domain.SignupForm;
 import trainingproject.BeerRating.Domain.User;
 import trainingproject.BeerRating.Domain.UserRepository;
-
 
 
 @Controller
 public class UserController {
 	@Autowired
     private UserRepository userRepository;
-	
-	
+		
 	/** RESTful service to get all users **/
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public @ResponseBody List<User> userListRest() {
 		return (List<User>) userRepository.findAll();
 	}
 	
 	/** returns a list of all users in database for admin **/
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/userlist")
 	public String userlist(Model model) {
 		 model.addAttribute("users", userRepository.findAll());
@@ -41,7 +39,7 @@ public class UserController {
 	}
 	
 	 @RequestMapping(value = "signup")
-	    public String addStudent(Model model){
+	    public String signUp(Model model){
 	    	model.addAttribute("signupform", new SignupForm());
 	        return "signup";
 	    }	

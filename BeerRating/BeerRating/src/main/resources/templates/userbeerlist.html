@@ -45,10 +45,8 @@
 			<th width="480" align="left">It`s always a good time for a new one!</th>
 		</tr>
 		<tr>
-			<!--<td ><button id="button1" class="form_button" >New Beer</button></td> -->
 			<td><a class="linkki" th:href="@{/add}">New Beer</a></td>
 		</tr>
-		
 	</table>
 	
 	<!-- For Admin -->
@@ -66,45 +64,11 @@
 </div><!-- end of container -->
 
 <div class="logoutcontainer1">
-<form th:action="@{/logout}" method="post">
-				<input type="submit" value="Sign Out" class="linkkiOut" />
-				</form>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="linkkiOut" />
+	</form>
 </div>
 
-<!-- Add new Beer -->
-<!--<div id="block1">
-	<div class="innercontainer" >
-		<h1>Add a new Beer</h1>
-	 <form class="cf" th:object="${beer}"th:action="@{/save}" method="post">
-
-		<div class="half left cf">
-			<label for="name"> Name</label>
-			<input type="text" th:field="*{name}" />
-			<div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
-			<br />
-		
-			<label for="alcoholPercentage"> Alcohol %</label>
-			<input type="text" th:field="*{alcoholPercentage}" />
-			<div class="errors" th:if="${#fields.hasErrors('alcoholPercentage')}" th:errors="*{alcoholPercentage}">Error</div>
-			<br />
-		</div>
-		<div class="half right cf">
-			<label for="brewery"> Brewery</label>
-			<input type="text" th:field="*{brewery}" />
-			<div class="errors" th:if="${#fields.hasErrors('brewery')}" th:errors="*{brewery}">Error</div>
-			<br />
-	
-			<label for="beerStyle"> Style</label>
-			<input type="text" th:field="*{beerStyle}" />
-			<div class="errors" th:if="${#fields.hasErrors('beerStyle')}" th:errors="*{beerStyle}">Error</div>
-			<br />
-		</div>
-
-			<input type="submit" value="Add Beer" class="linkki"></input>
-
-	</form>
-	</div><!-- end of innercontainer -->
-<!--</div> <!-- end of block1 --> 
 
 
 		<!-- if beers is empty -->
@@ -117,37 +81,33 @@
 		</div><!-- end of th:ifr -->
 			
 	
-	
 	<!-- if beers is Not empty -->
 	<div th:if="${!beers.empty}">
 		<div class="container" >
 			<div th:each="beer : ${beers}">
 				<div class="innercontainer" >
 					<img class= "musta"  th:src="@{/images/korkki.png}"/>
-					<table class= "infotable">
+					<table class= "beerlisttable">
 						<tr>
 							<th width="80" align="left">Name</th>
 							<td width="300" th:text="${beer.name}"></td>
 							<!--  <th width="200" align="left">username:</th> -->
 						</tr>
-
 						<tr>
 							<th width="80" align="left">Brewery</th>
 							<td width="300" th:text="${beer.brewery}"></td>
 							<!-- <td th:text="${beer.user.username}"></td> -->
 						</tr>
-
 						<tr>
 							<td></td>
-							<!--<td ><a th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>-->
-							<!--	<td ><a th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>-->
+							<td></td>
 							<td align="right"><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Details</a></td>
 						</tr>
 					</table>
 				</div><!-- end of innercontainer -->
 			</div><!-- end of th:each -->
 		</div><!-- end of container -->
-	</div><!-- end of th:ifr -->
+	</div><!-- end of th:if -->
 	
 
 		

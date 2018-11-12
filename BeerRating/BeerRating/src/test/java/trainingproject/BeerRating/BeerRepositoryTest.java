@@ -42,10 +42,9 @@ public class BeerRepositoryTest {
 		assertThat(beer).hasFieldOrPropertyWithValue("name", "Lösösen Lager");
 	}
 	
-
 	@Test
 	public void shouldFindBeersIfRepositoryNotempty() {
-		repository.save(new Beer("Hitachino Nest Dai Dai IPA", 6.0, "Kiuchi Brewery", "IPA", Urepository.findByusername("mikko").get(0)));
+		repository.save(new Beer("Hitachino Nest Dai Dai IPA", 6.0, "Kiuchi Brewery", "IPA", Urepository.findByUsername("mikko")));
 		
 		Iterable<Beer> beers = repository.findAll();
 		assertThat(beers).isNotEmpty();

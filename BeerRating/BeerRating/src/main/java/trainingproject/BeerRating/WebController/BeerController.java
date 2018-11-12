@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,20 +41,20 @@ public class BeerController {
 	@Autowired
 	private UserRepository userRepository;
 
-	
-
 	/** RESTful service to get all beers **/
+	
 	@RequestMapping(value = "/beers", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public @ResponseBody List<Beer> beerListRest() {
 		return (List<Beer>) beerRepository.findAll();
 	}
 	
 	  /** RESTful service to get beer by id **/
+	@PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value="/beer/{id}", method = RequestMethod.GET)
-    public @ResponseBody Optional<Beer> findBeerkRest(@PathVariable("id") Long beerId) {	
+    public @ResponseBody Optional<Beer> findBeerRest(@PathVariable("id") Long beerId) {	
     	return beerRepository.findById(beerId);
     }  
-	
 	
 
 	/** login form **/
@@ -63,43 +63,33 @@ public class BeerController {
 		return "login";
 	}
 
-	/** "/" **/
+	/** "/" returns loginform**/
 	@RequestMapping(value = "/")
 	public String line() {
 		return "login";
 	}
 
-	/** returns frontpage with user info **/
-	/*@RequestMapping(value = "/frontpage", method = RequestMethod.GET)
-	public String Frontpaget(Model model, Principal principal) {
-
-		// gets the username from logged in user
-		String username = principal.getName();
-		model.addAttribute("username", username);
-		
-		return "frontpage";
-	}*/
-	
 	/** returns a list of all beers in database for admin **/
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/beerlist")
 	public String beerList(Model model) {
-		
+
 		// reverse List so that the newest is on top
-		List<Beer> beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));														
+		List<Beer> beers = beerRepository.findAll(new Sort(Sort.Direction.DESC, "beerId"));
 		model.addAttribute("beers", beers);
 		return "beerlist";
 	}
 	
-	
 
 	/** returns a list of usersbeers **/
+
 	@RequestMapping(value = "/userbeerlist")
 	public String usersBeerList(Model model, Principal principal) {
-		
+
 		// gets the username from logged in user
-				String username = principal.getName();
-				model.addAttribute("username", username);
-				
+		String username = principal.getName();
+		model.addAttribute("username", username);
+
 		User user = userRepository.findByUsername(username);
 		model.addAttribute("user", user);
 
@@ -107,20 +97,13 @@ public class BeerController {
 		// reverse List so that the newest is on top
 		Collections.reverse(beers);
 		model.addAttribute("beers", beers);
-		
-		// for adding new beer with Jqueryform
-		//model.addAttribute("beer", new Beer());
-		
-		/*long id = user.getId();
-		System.out.println("TÄÄLLÄ TOIVOTTAVASTI OLSISI USER ID!!! " + id);*/
 
 		return "userbeerlist";
 	}
-
 	
-	/** saves users beer that was posted with the form from userbeerlist page**/
+	/** saves users beer that was posted with the form addbeer**/
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String savebeerforuser(@Valid Beer beer, BindingResult bindingResult, Principal principal, Model model) {
+	public String saveBeerForUser(@Valid Beer beer, BindingResult bindingResult, Principal principal, Model model) {
 		
 		 if (bindingResult.hasErrors()) {
 	        	return "addbeer";
@@ -153,38 +136,35 @@ public class BeerController {
 	/** shows a beer and its ratings based on beerid **/
 	@RequestMapping(value = "/showbeer/{id}", method = RequestMethod.GET)
 	public String showRatings(@PathVariable("id") Long beerId, Model model) {
-		
-		
-			Beer beer = beerRepository.findById(beerId).get();
-			model.addAttribute("beer", beer);
 
-			List<Rating> ratings = ratingRepository.findByBeer(beer);
-			Collections.reverse(ratings);//reverse List of ratings so that the newest is on top
-			model.addAttribute("ratings", ratings);
-			
-			
-			model.addAttribute("rating", new Rating());// for adding new rating with Jqueryform
+		Beer beer = beerRepository.findById(beerId).get();
+		model.addAttribute("beer", beer);
 
-			// calculate average from beers ratings
-			double[] allRates = ratingRepository.findRatesByBeer(beer);
-			double sum = 0;
-			
-			for (int i = 0; i < allRates.length; i++) {
-				sum = sum + allRates[i];
+		List<Rating> ratings = ratingRepository.findByBeer(beer);
+		Collections.reverse(ratings);// reverse List of ratings so that the newest is on top
+		model.addAttribute("ratings", ratings);
 
-				double average = (sum / allRates.length);
-				model.addAttribute("average", average);
-			}
-			
-			return "beer";
+		model.addAttribute("rating", new Rating());// for adding new rating with Jqueryform
+
+		// calculate average from beers ratings
+		double[] allRates = ratingRepository.findRatesByBeer(beer);
+		double sum = 0;
+
+		for (int i = 0; i < allRates.length; i++) {
+			sum = sum + allRates[i];
+
+			double average = (sum / allRates.length);
+			model.addAttribute("average", average);
 		}
-		
+
+		return "beer";
+	}
 	
 
 	/** edits a beer based on id **/
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editBeer(@PathVariable("id") Long beerId, Model model) {
-		
+
 		model.addAttribute("beer", beerRepository.findById(beerId));
 
 		return "editbeer";
@@ -195,26 +175,24 @@ public class BeerController {
 	 * details page
 	 **/
 	@RequestMapping(value = "/saveedited", method = RequestMethod.POST)
-	public String update(@Valid Beer beer , BindingResult bindingResult, Model model) {
-		
-		 if (bindingResult.hasErrors()) {
-	        	return "editbeer";
-	        }
-		 	
-		 	beerRepository.save(beer);
-		 	return "redirect:/showbeer/" + beer.getBeerId();
-	    }
+	public String update(@Valid Beer beer, BindingResult bindingResult, Model model) {
+
+		if (bindingResult.hasErrors()) {
+			return "editbeer";
+		}
+
+		beerRepository.save(beer);
+		return "redirect:/showbeer/" + beer.getBeerId();
+	}
 		
 
-	/** returns a empty form for adding beers **/ 
-	
-	  @RequestMapping(value = "/add") public String addBeer(Model model) {
-	 model.addAttribute("beer", new Beer());
-	 
-	 return "addbeer"; 
-	 }
-	 
+	/** returns a empty form for adding beers **/
+	@RequestMapping(value = "/add")
+	public String addBeer(Model model) {
+		model.addAttribute("beer", new Beer());
 
-	
+		return "addbeer";
+	}
+
 
 }

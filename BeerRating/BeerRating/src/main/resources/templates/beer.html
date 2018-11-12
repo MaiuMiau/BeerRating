@@ -32,79 +32,52 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div class="headingcontainer" >
-<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
-</div>
-<div class="container" >
-	<div class="innercontainer" >
-		<h1 th:text="${beer.name}"></h1>
+	<div class="headingcontainer" >
+		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
+	</div>
 	
-		<table class= "infotable">
-			<tr>
-				<th align="left">Brewery</th>
-				<td  width="250" th:text="${beer.brewery}"></td>
-			</tr>
-			
-			
+	<div class="container" >
+		<div class="innercontainer" >
+			<h1 th:text="${beer.name}"></h1>
+	
+				<table class= "infotable">
+					<tr>
+						<th align="left">Brewery</th>
+						<td  width="250" th:text="${beer.brewery}"></td>
+					</tr>
+					<tr>
+						<th width="90" align="left">Alcohol %</th>
+						<td  width="150"  th:text="${beer.alcoholPercentage}"></td>
+					</tr>
+					<tr>
+						<th width="90" align="left">Style</th>
+						<td width="150"   th:text="${beer.beerStyle}"></td>
+					</tr>
+					<tr>
+						<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
+						<td ><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
+					</tr>
+					<tr>
+						<td>.......................</td>
+						<td>........................ </td>
+					</tr>
+					<tr>
+						<th align="left">Ratings</th>
+						<th align="left">Average</th>
+					</tr>
+					<tr>
+						<td th:text="${ratings.size()}"></td>
+						<td th:inline="text"> [[${average}]] / 5</td>
+					</tr>
+					<tr>
+						<td><button sec:authorize="hasAuthority('USER')" id="button1" class="form_button">Add Rating</button></td>
+						<td><button id="button2" class="form_button">Show/Hide Ratings</button></td>
+					</tr>
+				</table>
 		
-			<tr>
-				<th width="90" align="left">Alcohol %</th>
-				<td  width="150"  th:text="${beer.alcoholPercentage}"></td>
-			
-			</tr>
-			<tr>
-				<th width="90" align="left">Style</th>
-				<td width="150"   th:text="${beer.beerStyle}"></td>
-			</tr>
-			<tr>
-				<td><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/edit/{id}(id=${beer.beerId})}">Edit</a></td>
-				<td ><a sec:authorize="hasAuthority('USER')" class="linkki" th:href="@{/delete/{id}(id=${beer.beerId})}">Delete</a></td>
-			</tr>
-			
-			<tr>
-				<td>.......................</td>
-				<td>........................ </td>
-			</tr>
-			
-			<tr>
-				<th align="left">Ratings</th>
-				<th align="left">Average</th>
-			</tr>
-			<tr>
-				<td th:text="${ratings.size()}"></td>
-				<td th:text="${average}"></td>
-			</tr>
-			
-			<tr>
-				<td><button sec:authorize="hasAuthority('USER')" id="button1" class="form_button">Add Rating</button></td>
-				<td><button id="button2" class="form_button">Show/Hide Ratings</button></td>
-			</tr>
-			<tr>
-			<!-- 		<td style="visibility:hidden" th:text="${beer.user.username}"></td>-->
-			<!-- 	<td style="visibility:hidden" th:text="${beer.beerId}"></td> -->
-			</tr>
-			
-		</table>
-		
-		<img width="270" class="pullo" th:src="@{/images/pullo7.png}"/>
-	</div><!-- end of innercontainer -->
-		<!--	<div class="innercontainer" >
-		<table border="1">
-			<tr>
-				<th width="150" align="left">Rating count</th>
-				<th width="250" align="left">Rating average</th>
-			</tr>
-			<tr>
-				<td th:text="${ratings.size()}"></td>
-				<td th:text="${average}"> /5</td>
-			</tr>
-			<tr>
-				<th width="150" align="left"><button sec:authorize="hasAuthority('USER')" id="button1" class="form_button">Add Rating</button></th>
-				<th width="150" align="left"><button id="button2" class="form_button">Show / Hide Ratings</button></th>
-			</tr>
-		</table>
-	</div><!-- end of innercontainer -->
-</div><!-- end of container -->
+			<img width="270" class="pullo" th:src="@{/images/pullo7.png}"/>
+		</div><!-- end of innercontainer -->
+	</div><!-- end of container -->
 	
 		<div class="logoutcontainer">
 			<a sec:authorize="hasAuthority('USER')" class="linkkiOut" th:href="@{/userbeerlist}">To BeerList</a>
@@ -126,14 +99,14 @@ $(document).ready(function(){
 		<!-- block2 visible when show ratings buttons is clicked -->
 	<div id="block2">
 			
-			<!-- if ratings is empty -->
-	<div th:if="${ratings.empty}">
-		<div class="innercontainer" >
-			<h2>There are no ratings for this beer yet!!</h2>
-		</div><!-- end of innercontainer -->
-	</div><!-- end of th:if-->
+		<!-- if ratings is empty -->
+		<div th:if="${ratings.empty}">
+			<div class="innercontainer" >
+				<h2>There are no ratings for this beer yet!!</h2>
+			</div><!-- end of innercontainer -->
+		</div><!-- end of th:if-->
 	
-			<!-- if ratings is Not empty -->
+		<!-- if ratings is Not empty -->
 		<div th:if="${!ratings.empty}">
 			<div th:each="rating: ${ratings}">
 				<div class="innercontainer">
@@ -171,36 +144,21 @@ $(document).ready(function(){
 
 	<!-- visible when add rating buttons is clicked -->
 	<div id="block1">
-	<div class="innercontainer" >
-		
+		<div class="innercontainer" >
 			<h1>Add a new Rating</h1>
-
-			<form class="cf" th:object="${rating}" th:action="@{/saveratings/{id}(id=${beer.beerId})}" method="post">
-
-			<div class="half left cf">
-				<label for="date"> Date </label> <input type="text"
-					th:field="*{date}" placeholder="dd.mm.yyyy"/>
-					<div class="errors" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error</div>
-					<br />
-			
-
-				<label for="location"> Location</label> <input type="text"
-					th:field="*{location}" />
-					<div th:if="${#fields.hasErrors('location')}" th:errors="*{location}"> error</div>
-					<br />
-				</div>
 				
-		
-				<label for="servingStyle">Serving Style</label> <input type="text"
-					th:field="*{servingStyle}" />
-					<div class="errors" th:if="${#fields.hasErrors('servingStyle')}" th:errors="*{servingStyle}">Error</div>
-					<br />
-				
-
-				<label for="flavorProfile"> Flavor Profile</label> <input
-					type="text" th:field="*{flavorProfile}" />
-					<div class="errors" th:if="${#fields.hasErrors('flavorProfile')}" th:errors="*{flavorProfile}">Error</div>
-					<br /><br />
+				<form class="cf" th:object="${rating}" th:action="@{/saveratings/{id}(id=${beer.beerId})}" method="post">
+					<div class="half left cf">
+						<label for="date"> Date </label> <input type="text" th:field="*{date}" placeholder="dd.mm.yyyy"/>
+							<div class="errors" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error</div><br/>
+						<label for="location"> Location</label> <input type="text" th:field="*{location}" />
+							<div th:if="${#fields.hasErrors('location')}" th:errors="*{location}"> error</div><br/>
+					</div>
+						<label for="servingStyle">Serving Style</label> <input type="text" th:field="*{servingStyle}" />
+							<div class="errors" th:if="${#fields.hasErrors('servingStyle')}" th:errors="*{servingStyle}">Error</div><br/>
+						<label for="flavorProfile"> Flavor Profile</label> <input type="text" th:field="*{flavorProfile}" />
+							<div class="errors" th:if="${#fields.hasErrors('flavorProfile')}" th:errors="*{flavorProfile}">Error</div><br/>
+					<br/>
 
 				<!-- LIKE -->
 				<label for="rating"> Rating</label>
@@ -227,10 +185,8 @@ $(document).ready(function(){
 
 				<input type="submit" value="Add" class="form_button"></input>
 			</form>
-			</div><!-- end of innercontainer -->
-		</div><!-- end of block -->
+		</div><!-- end of innercontainer -->
+	</div><!-- end of block -->
 	
-
-
 </body>
 </html>

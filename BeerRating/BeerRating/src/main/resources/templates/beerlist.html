@@ -15,57 +15,50 @@
 	<div class="headingcontainer" >
 		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
 	</div>
+
 	<div>
 		<h2 th:inline="text">[[${#httpServletRequest.remoteUser}]]</h2>
 	</div>
-	<div class="container" >
-	<div class="innercontainer" >
-	<h1>All the Beers in the database</h1>
-	
-	
+	<div class="container">
+		<div class="innercontainer">
+			<h1>All the Beers in the database</h1>
 		</div><!-- end of innercontainer -->
-		</div><!-- end of innercontainer -->
-		
-		<div class="logoutcontainer">
-				 <a class="linkkiOut" th:href="@{/userbeerlist}">FrontPage</a>
-		</div>
+	</div><!-- end of innercontainer -->
 
-		<div class="logoutcontainer">
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" class="linkkiOut" />
-				</form>
-		</div>
-		<div class="container" >
-	<div th:each="beer : ${beers}">
-		<div class="innercontainer" >
-		<table >
-			<tr>
-				<th width="150" align="left">Name</th>
-				<td width="350" th:text="${beer.name}"></td>
-				
-			</tr>
-
-			<tr>
-				<th width="150" align="left">Brewery</th>
-				<td width="350" th:text="${beer.brewery}"></td>
-			</tr>
-			
-			<tr>
-				<th width="150" align="left">Who added</th>
-				<td width="350" th:text="${beer.user.username}"></td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td align="right"><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
-			</tr>
-		</table>
-		<br>
+	<div class="logoutcontainer">
+		<a class="linkkiOut" th:href="@{/userbeerlist}">FrontPage</a>
 	</div>
-	
 
-</div><!-- end of innercontainer -->
-</div><!-- end of container -->
+		<div class="logoutcontainer">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="linkkiOut" />
+			</form>
+		</div>
+		
+	<div class="container" >
+		<div th:each="beer : ${beers}">
+			<div class="innercontainer" >
+				<table >
+					<tr>
+						<th width="150" align="left">Name</th>
+						<td width="350" th:text="${beer.name}"></td>
+					</tr>
+					<tr>
+						<th width="150" align="left">Brewery</th>
+						<td width="350" th:text="${beer.brewery}"></td>
+					</tr>
+					<tr>
+						<th width="150" align="left">Who added</th>
+						<td width="350" th:text="${beer.user.username}"></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td align="right"><a class="linkki"th:href="@{/showbeer/{id}(id=${beer.beerId})}">Show Details</a></td>
+					</tr>
+				</table>
+			</div>
+		</div><!-- end of innercontainer -->
+	</div><!-- end of container -->
 
 </body>
 </html>

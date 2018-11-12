@@ -3,39 +3,36 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="ISO-8859-1">
-
-
 <title>Userlist</title>
 <link type="text/css" rel="stylesheet" th:href="@{/css/BeerAppstyle.css}" />
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
 </head>
 <body>
-
 	<div class="headingcontainer" >
 		<h1 class="headingcontainer"> <img class= "valkoinen" th:src="@{/images/barleyvasen2.png}"/>Beer Rating<img class= "valkoinen" th:src="@{/images/barleyoikea2.png}"/></h1>
 	</div>
+	
 	<div>
 		<h2 th:inline="text">[[${#httpServletRequest.remoteUser}]]</h2>
 	</div>
+	
 	<div class="container" >
 		<div class="innercontainer">
 			<h1>All the Users in the database</h1>
-
-			
 		</div><!-- end of innercontainer -->
 	</div><!-- end of container -->
+		
 		<div class="logoutcontainer">
-				 <a class="linkkiOut" th:href="@{/userbeerlist}">FrontPage</a>
+			<a class="linkkiOut" th:href="@{/userbeerlist}">FrontPage</a>
 		</div>
 
 		<div class="logoutcontainer">
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" class="linkkiOut" />
-				</form>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="linkkiOut" />
+			</form>
 		</div>
-<div class="container" >	
+
+<div class="container">	
 		<div th:each="user: ${users}">
 			<div class="innercontainer">
 				<table>

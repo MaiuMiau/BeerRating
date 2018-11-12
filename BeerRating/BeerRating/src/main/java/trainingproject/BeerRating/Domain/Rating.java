@@ -8,33 +8,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.Range;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-
 
 @Entity
 public class Rating {
-	
+	@NotNull
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private Long id;
 	 
-	@NotNull
 	@Size(min=1, max=12)// ei voi laittaa 10 koska commandlinerunner laskee myös string parametrin lainausmerkit
 	//@Pattern(regexp = "\\d{2}\\.\\d{2}\\.\\d{4}") ei toimi
-	//@Pattern(regexp = "{^\\d{4}-\\d{2}-\\d{2}$}")  
-	
 	private String date;
 	
-	@NotNull
 	@Size(min=3, max=50)
 	private String location;
 	
-	@NotNull
 	@Size(min=3, max=20)
 	private String servingStyle;
 	
@@ -43,7 +33,7 @@ public class Rating {
 	
 	@NotNull
 	@Range(min = 0, max = 5)
-	private double rate; 
+	private int rate; 
 	
 	 @ManyToOne
 	 @JsonIgnore
@@ -54,7 +44,7 @@ public class Rating {
 	public Rating() {} 
 	
 	// Parameterized constructor
-	public Rating(String date, String location, String servingStyle,String flavorProfile, double rate, Beer beer  ) {
+	public Rating(String date, String location, String servingStyle,String flavorProfile, int rate, Beer beer  ) {
 		super();
 		
 		this.date = date;
@@ -81,8 +71,6 @@ public class Rating {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	public String getDate() {
 		return date;
@@ -116,19 +104,13 @@ public class Rating {
 		this.flavorProfile = flavorProfile;
 	}
 
-	public double getRate() {
+	public int getRate() {
 		return rate;
 	}
 
-	public void setRate(double rate) {
+	public void setRate(int rate) {
 		this.rate = rate;
 	}
-
-	/*@Override
-	public String toString() {
-		return "Rating [id=" + id + ", date=" + date + ", location=" + location + ", servingStyle="
-				+ servingStyle + ", flavorProfile=" + flavorProfile + ", rating=" + rating + "]";
-	}*/
 
 	@Override
 	public String toString() {
@@ -138,8 +120,5 @@ public class Rating {
 		else return "Rating [id=" + id + ", date=" + date + ", location=" + location + ", servingStyle="
 		+ servingStyle + ", flavorProfile=" + flavorProfile + ", rate=" + rate + "]";
 	}
-	
-	
-	
 
 }

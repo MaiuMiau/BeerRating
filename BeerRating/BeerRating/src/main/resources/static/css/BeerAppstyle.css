@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 html {
-	background-color: rgb(255, 250, 232);
+	background-color: rgb(232, 217, 155, 0.65);
 	font-family: 'Montserrat', Arial, sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -14,7 +14,7 @@ html {
 body {
 	font-family: 'Montserrat', Arial, sans-serif;
 	border: solid 2px #474544;
-	border-radius: 5px;
+	
 	width: 100%;
 	margin: auto;
 	max-width: 700px;
@@ -37,6 +37,15 @@ body {
 .infotable {
 	display: inline-block;
 	max-width: 340px;
+	border-radius: 5px;
+	border-spacing: 6px;
+	position: relative;
+	
+}
+
+.beerlisttable {
+	display: inline-block;
+	max-width: 400px;
 	border-radius: 5px;
 	border-spacing: 6px;
 	position: relative;
@@ -114,7 +123,7 @@ tr {
 .logoutcontainer {
 	display: inline-block;
 	max-width: 100px;
-	margin-bottom: 5px;
+	
 	text-align: right;
 	position: relative;
 	left: 480px;
@@ -122,7 +131,7 @@ tr {
 
 .logoutcontainer1 {
 	max-width: 100px;
-	margin-bottom: 5px;
+	
 	text-align: right;
 	position: relative;
 	left: 530px;

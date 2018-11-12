@@ -36,7 +36,7 @@ public class RaitingRepositoryTest {
 	public void createNewRAting() {
 		
 	
-		Rating rating = new Rating("23.12.2018", "BeerHouse", "Botle", "Sweet", 5.0, new Beer("Lösösen Lager", 4.0, "Lösösen Panimo", "Lager"));
+		Rating rating = new Rating("23.12.2018", "BeerHouse", "Botle", "Sweet", 5, new Beer("Lösösen Lager", 4.0, "Lösösen Panimo", "Lager"));
 		ratingRepository.save(rating);
 
 		assertThat(rating.getId()).isNotNull();
@@ -50,7 +50,7 @@ public class RaitingRepositoryTest {
 		Beer beer = new Beer("Lösösen Lager", 4.0, "Lösösen Panimo", "Lager");
 		Brepository.save(beer);
 	
-		Rating rating = new Rating("18.11.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4.0,Brepository.findByName("Lösösen Lager").get(0));
+		Rating rating = new Rating("18.11.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4,Brepository.findByName("Lösösen Lager").get(0));
 		ratingRepository.save(rating);
 
 		Long id = rating.getId();
@@ -68,7 +68,7 @@ public class RaitingRepositoryTest {
 		Beer beer = new Beer("Lösösen Lager", 4.0, "Lösösen Panimo", "Lager");
 		Brepository.save(beer);
 		
-		Rating rating = new Rating("18.11.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4.0,Brepository.findByName("Lösösen Lager").get(0));
+		Rating rating = new Rating("18.11.2018", "BeerBeer",  "Can", "Sweet, Chocolate", 4,Brepository.findByName("Lösösen Lager").get(0));
 		ratingRepository.save(rating);
 
 		
