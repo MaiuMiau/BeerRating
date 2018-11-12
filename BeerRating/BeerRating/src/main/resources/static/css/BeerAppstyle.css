@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 html {
-	background-color: rgb(232, 217, 155, 0.65);
+	background-color: rgb(221, 207, 146, 0.55);
 	font-family: 'Montserrat', Arial, sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -21,7 +21,7 @@ body {
 	min-height: 670px;
 	position: relative;
 	/*background:url(http://myy.haaga-helia.fi/~a1704485/beerrating/IMG_0678.JPG)center ;*/
-	background-image: url('../images/back2.JPG');
+	background-image: url('../images/back7.JPG');
 	background-position: center top;
 	background-repeat: repeat;
 	background-size: 700px;
@@ -81,34 +81,31 @@ tr {
 
 .container {
 	max-width: 570px;
-	background: rgb(232, 217, 155, 0.85);
+	background: rgb(221, 207, 146, 0.85);
 	border-radius: 5px;
 	margin: 10px auto;
 	position: relative;
 	padding-left: 10px;
 	padding-right: 10px;
-	padding-top: 24px;
-	padding-bottom: 24px;
+	padding-top: 16px;
+	padding-bottom: 16px;
 }
 
 .headingcontainer {
 	text-transform: uppercase;
-	/*font-family: 'Bevan', cursive;*/
 	font-family: 'Cabin Sketch', cursive;
 	max-width: 690px;
 	margin: 20px auto;
 	position: relative;
 	text-align: center;
 	font-size: 60px;
-	/* text-shadow: 3px 2px rgb(255, 250, 232, 0.6);
-    color:black;*/
-	color: rgb(232, 217, 155, 0.95);
+   color:black;
+	color: rgb(221, 207, 146, 0.95);
 	text-shadow: 3px 2px black;
 }
 
 .innercontainer {
 	max-width: 500px;
-	/*background: rgb(255, 250, 232, 0.6);*/
 	background: rgb(250, 255, 229, 0.6);
 	border-radius: 5px;
 	border: 4px double #474544;
@@ -160,7 +157,6 @@ tr {
 
 h1 {
 	font-family: 'Cabin Sketch', cursive;
-	/*text-align:center;*/
 	font-size: 39px;
 	padding: 0;
 	margin: 0 0 20px 0;
@@ -200,26 +196,26 @@ form {
 /* slideToggle DIV */
 #block1 {
 	max-width: 570px;
-	background: rgb(232, 217, 155, 0.85);
+	background: rgb(221, 207, 146, 0.85);
 	border-radius: 5px;
 	margin: 50px auto;
 	padding-left: 10px;
 	padding-right: 10px;
 	padding-top: 14px;
-	padding-bottom: 10px;
+	padding-bottom: 16px;
 	position: relative;
 	display: none;
 }
 
 #block2 {
 	max-width: 570px;
-	background: rgb(232, 217, 155, 0.85);
+	background: rgb(221, 207, 146, 0.85);
 	border-radius: 5px;
 	margin: 50px auto;
 	padding-left: 10px;
 	padding-right: 10px;
 	padding-top: 14px;
-	padding-bottom: 10px;
+	padding-bottom: 16px;
 	position: relative;
 	display: none;
 }
@@ -228,7 +224,6 @@ input[type='text'], [type="password"] {
 	display: block;
 	width: 200px;
 	padding: 8px 8px 8px 8px;
-	/* border:1px dashed #DBDBDB;*/
 	border: 1px solid #474544;
 	border-radius: 5px;
 	color: #3F3F3F;
@@ -250,7 +245,6 @@ label {
 	display: inline-block;
 	background: #b2b3b7;
 	font-size: 0.675em;
-	/*font-weight: bold;*/
 	outline: none;
 	padding: 5px 5px;
 	text-transform: uppercase;
@@ -271,7 +265,6 @@ label {
 	display: inline-block;
 	background: #b2b3b7;
 	font-size: 0.675em;
-	/*font-weight: bold;*/
 	outline: none;
 	padding: 5px 5px;
 	text-transform: uppercase;
@@ -294,7 +287,6 @@ label {
 	display: inline-block;
 	background: #bfbf46;
 	font-size: 0.675em;
-	/*font-weight: bold;*/
 	outline: none;
 	padding: 8px 8px;
 	text-transform: uppercase;
@@ -317,15 +309,10 @@ label {
   width: 150px;
   height: 30px;
   padding: 5px 10px;
-
   border-radius: 5px;
-   border:1px solid #474544;
+  border:1px solid #474544;
   background: #FFF;
-  
   overflow: hidden;
-  
- 
-  
   unicode-bidi: bidi-override;
   direction: rtl;
 }

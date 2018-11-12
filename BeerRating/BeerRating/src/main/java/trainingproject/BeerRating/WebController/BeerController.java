@@ -68,7 +68,7 @@ public class BeerController {
 	public String line() {
 		return "login";
 	}
-
+	
 	/** returns a list of all beers in database for admin **/
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/beerlist")
