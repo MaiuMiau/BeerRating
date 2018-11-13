@@ -12,11 +12,12 @@ html {
 body {
 	font-family: 'Montserrat', Arial, sans-serif;
 	border: solid 2px #474544;
-	
+	border-radius: 5px;
 	width: 100%;
 	margin: auto;
+	margin-top: 40px;
 	max-width: 700px;
-	min-height: 670px;
+	min-height: 600px;
 	position: relative;
 	background-image: url('../images/back7.jpg');
 	background-position: center top;
