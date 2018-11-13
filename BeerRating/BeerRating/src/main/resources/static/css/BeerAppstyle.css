@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 html {
-	background-color: rgb(221, 207, 146, 0.55);
+	background-color: rgb(221, 207, 146, 0.75);
 	font-family: 'Montserrat', Arial, sans-serif;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -93,6 +93,7 @@ tr {
 	font-family: 'Cabin Sketch', cursive;
 	max-width: 690px;
 	margin: 20px auto;
+	margin-bottom: 26px;
 	position: relative;
 	text-align: center;
 	font-size: 60px;

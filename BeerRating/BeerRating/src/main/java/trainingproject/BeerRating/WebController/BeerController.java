@@ -155,7 +155,7 @@ public class BeerController {
 			sum = sum + allRates[i];
 
 			double average = (sum / allRates.length);
-			DecimalFormat desimaalit = new DecimalFormat("0.00");
+			DecimalFormat desimaalit = new DecimalFormat("0.0");
 			
 			
 			model.addAttribute("average", desimaalit.format(average));
