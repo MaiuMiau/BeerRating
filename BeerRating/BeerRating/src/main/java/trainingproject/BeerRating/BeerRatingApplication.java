@@ -29,9 +29,9 @@ public class BeerRatingApplication {
 		return (args) -> {
 			log.info("Save some test data");
 			
-			// Create users:  Mikko/nieminen, Maiju/nurmi, admin/admin, Bruno/retiisi
+			// Create users:  Mikko/nieminen, user/nurmi, admin/admin, Bruno/retiisi
 			User user1 = new User("Mikko", "$2a$10$CMcOTHrSE0uuk8wiOoFV.OltHTniVbtR96Kjl7gYQ3i/AXqfcXKHm", "USER");
-			User user2 = new User("Maiju", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "USER");
+			User user2 = new User("user", "$2a$10$XajKI4SNSd8OfsewNtiv6.ivdfQybq3JAtA0PwDQ6M7ABe/yEveJS", "USER");
 			User user3 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
 			User user4 = new User("Bruno", "$2a$04$/O/TWiM.5OowQnS2KKBxSebW2gBItxRT9cazQgVZtYRThVFAsyS1.", "USER");
 			userRepository.save(user1);
@@ -39,10 +39,10 @@ public class BeerRatingApplication {
 			userRepository.save(user3);
 			userRepository.save(user4);
 			
-			beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout", userRepository.findByUsername("Maiju")));
-			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale", userRepository.findByUsername("Maiju")));
-			beerRepository.save(new Beer("Ballast Point Sour Wench Blackberry Ale", 7.0, "Ballast Point Brewing", "berliner weisse", userRepository.findByUsername("Maiju")));
-			beerRepository.save(new Beer("Stone's Ginger Joe", 4.0, "Quantum Beverages", "special", userRepository.findByUsername("Mikko")));
+			beerRepository.save(new Beer("Samuel Smith Organic Chocolate Stout", 5.0, "Samuel Smith Brewery", "sweet stout", userRepository.findByUsername("user")));
+			beerRepository.save(new Beer("Steamworks Pumpkin Ale", 6.5, "Steamworks", "ale", userRepository.findByUsername("user")));
+			beerRepository.save(new Beer("Ballast Point Sour Wench Blackberry Ale", 7.0, "Ballast Point Brewing", "berliner weisse", userRepository.findByUsername("user")));
+			beerRepository.save(new Beer("Stone's Ginger Joe", 4.0, "Quantum Beverages", "special", userRepository.findByUsername("user")));
 			beerRepository.save(new Beer("Hitachino Nest Dai Dai IPA", 6.0, "Kiuchi Brewery", "IPA", userRepository.findByUsername("Mikko")));
 		
 			
