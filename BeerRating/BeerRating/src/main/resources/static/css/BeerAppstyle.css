@@ -18,6 +18,7 @@ body {
 	margin-top: 40px;
 	max-width: 700px;
 	min-height: 600px;
+	padding-bottom: 15px;
 	position: relative;
 	background-image: url('../images/back7.jpg');
 	background-position: center top;
